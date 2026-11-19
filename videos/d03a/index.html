@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Unbounded"; font-weight: 900; src: url("assets/fonts/unbounded-latin-900-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+      @font-face { font-family: "Unbounded"; font-weight: 900; src: url("assets/fonts/unbounded-latin-ext-900-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+      @font-face { font-family: "Unbounded"; font-weight: 800; src: url("assets/fonts/unbounded-latin-800-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+      @font-face { font-family: "Unbounded"; font-weight: 800; src: url("assets/fonts/unbounded-latin-ext-800-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+      @font-face { font-family: "Fira Sans Condensed"; font-weight: 500; src: url("assets/fonts/fira-sans-condensed-latin-500-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+      @font-face { font-family: "Fira Sans Condensed"; font-weight: 500; src: url("assets/fonts/fira-sans-condensed-latin-ext-500-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+      @font-face { font-family: "Fira Sans Condensed"; font-weight: 700; src: url("assets/fonts/fira-sans-condensed-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+      @font-face { font-family: "Fira Sans Condensed"; font-weight: 700; src: url("assets/fonts/fira-sans-condensed-latin-ext-700-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+      :root { --plum: #2b1055; --cream: #fff8ec; --yellow: #ffd23f; --coral: #ff5e5b; --teal: #1fb5a3; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--plum); }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: "Fira Sans Condensed", sans-serif; background: var(--plum); }
+      .full { position: absolute; inset: 0; }
+      .scene { position: absolute; inset: 0; overflow: hidden; z-index: 2; }
+      .abs { position: absolute; }
+      .tag { left: 0; width: 1080px; text-align: center; font: 700 44px/1 "Fira Sans Condensed"; letter-spacing: 0.16em; }
+      .head { left: 90px; width: 900px; text-align: center; font: 900 96px/1.04 "Unbounded"; letter-spacing: -0.03em; text-wrap: balance; color: var(--cream); }
+      #studio { z-index: 1; background:
+        radial-gradient(ellipse 900px 700px at 50% 45%, #3d1a72 0%, #2b1055 70%),
+        var(--plum); }
+      #grid { z-index: 1; opacity: 0.16; background-image: linear-gradient(#1fb5a3 2px, transparent 2px), linear-gradient(90deg, #1fb5a3 2px, transparent 2px); background-size: 90px 90px; }
+      #scan { z-index: 9; opacity: 0.08; background: repeating-linear-gradient(0deg, #000 0px, #000 2px, transparent 2px, transparent 6px); pointer-events: none; }
+      #topbar { z-index: 6; left: 70px; top: 232px; width: 940px; height: 72px; }
+      #show { position: absolute; left: 0; top: 10px; padding: 12px 22px; background: var(--yellow); color: var(--plum); font: 700 34px/1 "Fira Sans Condensed"; letter-spacing: 0.12em; }
+      #clock { position: absolute; right: 0; top: 0; padding: 8px 24px; background: var(--cream); color: var(--plum); font: 700 58px/1 "Fira Sans Condensed"; letter-spacing: 0.04em; border-bottom: 8px solid var(--coral); }
+      #lower { z-index: 6; left: 50px; top: 1130px; width: 980px; }
+      #lt-a { display: inline-block; padding: 16px 28px 14px; background: var(--coral); color: var(--plum); font: 900 46px/1 "Unbounded"; letter-spacing: 0.02em; }
+      #lt-b { display: block; padding: 14px 28px; background: var(--cream); color: var(--plum); font: 700 44px/1 "Fira Sans Condensed"; letter-spacing: 0.06em; }
+      #ticker { z-index: 6; left: 0; top: 1310px; width: 1080px; height: 76px; background: var(--yellow); overflow: hidden; }
+      #tk-text { position: absolute; left: 0; top: 0; height: 76px; white-space: nowrap; font: 700 42px/76px "Fira Sans Condensed"; letter-spacing: 0.06em; color: var(--plum); }
+      #tk-label { position: absolute; left: 0; top: 0; height: 76px; padding: 0 26px; background: var(--teal); color: var(--plum); font: 900 34px/76px "Unbounded"; z-index: 2; }
+      .panel { position: absolute; top: 470px; width: 470px; height: 600px; overflow: hidden; border: 8px solid var(--cream); }
+      .plabel { position: absolute; left: 0; top: 26px; width: 100%; text-align: center; font: 900 64px/1 "Unbounded"; color: var(--plum); }
+      #wordmark { left: 0; width: 1080px; text-align: center; font: 800 46px/1 "Unbounded"; letter-spacing: 0.14em; color: var(--cream); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="13" data-width="1080" data-height="1920" data-fps="30">
+      <div id="studio" class="full clip" data-start="0" data-duration="13" data-track-index="0"></div>
+      <div id="grid" class="full clip" data-start="0" data-duration="13" data-track-index="1" data-layout-ignore></div>
+
+      <!-- 0.0-2.8 hook -->
+      <div id="b1" class="scene clip" data-start="0" data-duration="2.6" data-track-index="2">
+        <div id="b1-bar1" class="abs" style="left: 0; top: 420px; width: 1080px; height: 30px; background: var(--coral)"></div>
+        <div id="b1-bar2" class="abs" style="left: 0; top: 960px; width: 1080px; height: 30px; background: var(--teal)"></div>
+        <div id="b1-tag" class="abs tag" style="top: 500px; color: var(--yellow)">HABER BÜLTENİNDEN KISA KISA</div>
+        <div id="b1-head" class="abs head" style="top: 580px; font-size: 104px">AYNI KÖŞE, YILLAR SONRA</div>
+      </div>
+
+      <!-- 2.8-5.0 the trend -->
+      <div id="b2" class="scene clip" data-start="2.6" data-duration="2.1" data-track-index="2">
+        <div id="b2-head" class="abs head" style="top: 360px; font-size: 70px">İNTERNET BU HAFTA ESKİ FOTOĞRAFLARININ YERİNE DÖNÜYOR</div>
+        <svg id="b2-p1" class="abs" style="left: 190px; top: 705px" width="300" height="336" viewBox="0 0 330 370">
+          <rect width="330" height="370" fill="#fff8ec" /><rect x="20" y="20" width="290" height="260" fill="#ffd23f" />
+          <circle cx="240" cy="80" r="34" fill="#ff5e5b" /><path d="M20,280 L20,210 Q120,140 200,200 Q260,170 310,200 L310,280 Z" fill="#1fb5a3" />
+          <rect x="60" y="150" width="70" height="90" fill="#2b1055" />
+        </svg>
+        <svg id="b2-p2" class="abs" style="left: 590px; top: 705px" width="300" height="336" viewBox="0 0 330 370">
+          <rect width="330" height="370" fill="#fff8ec" /><rect x="20" y="20" width="290" height="260" fill="#1fb5a3" />
+          <circle cx="240" cy="80" r="34" fill="#ffd23f" /><path d="M20,280 L20,210 Q120,140 200,200 Q260,170 310,200 L310,280 Z" fill="#2b1055" />
+          <rect x="60" y="150" width="70" height="90" fill="#ff5e5b" />
+        </svg>
+        <svg id="b2-arrow" class="abs" style="left: 480px; top: 830px" width="120" height="80" viewBox="0 0 120 80"><path d="M6,40 L90,40 M64,12 L100,40 L64,68" fill="none" stroke="#ffd23f" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </div>
+
+      <!-- 5.0-7.4 split screen: 1996 | BUGÜN -->
+      <div id="b3" class="scene clip" data-start="4.7" data-duration="2.3" data-track-index="2">
+        <div id="b3-head" class="abs head" style="top: 340px; font-size: 76px; color: var(--yellow)">BAKKAL KÖŞESİ</div>
+        <div id="b3-left" class="panel" style="left: 60px; background: var(--yellow)">
+          <div class="plabel">1996</div>
+          <svg class="abs" style="left: 15px; top: 120px" width="424" height="445" viewBox="0 0 400 420">
+            <rect x="0" y="380" width="400" height="40" fill="#2b1055" />
+            <rect x="60" y="110" width="300" height="270" fill="#fff8ec" stroke="#2b1055" stroke-width="8" />
+            <rect x="90" y="60" width="240" height="56" fill="#2b1055" />
+            <text x="210" y="100" text-anchor="middle" font-family="Fira Sans Condensed" font-weight="700" font-size="36" letter-spacing="4" fill="#fff8ec">BAKKAL</text>
+            <g><rect x="60" y="116" width="50" height="50" fill="#ff5e5b" /><rect x="110" y="116" width="50" height="50" fill="#fff8ec" /><rect x="160" y="116" width="50" height="50" fill="#ff5e5b" /><rect x="210" y="116" width="50" height="50" fill="#fff8ec" /><rect x="260" y="116" width="50" height="50" fill="#ff5e5b" /><rect x="310" y="116" width="50" height="50" fill="#fff8ec" /></g>
+            <rect x="85" y="200" width="130" height="100" fill="#1fb5a3" stroke="#2b1055" stroke-width="6" />
+            <rect x="250" y="220" width="80" height="160" fill="#2b1055" />
+            <line x1="20" y1="380" x2="20" y2="300" stroke="#2b1055" stroke-width="8" /><circle cx="20" cy="290" r="18" fill="#1fb5a3" />
+            <circle cx="150" cy="356" r="22" fill="#fff8ec" stroke="#2b1055" stroke-width="6" />
+          </svg>
+        </div>
+        <div id="b3-right" class="panel" style="left: 550px; background: var(--teal)">
+          <div class="plabel">BUGÜN</div>
+          <svg class="abs" style="left: 15px; top: 120px" width="424" height="445" viewBox="0 0 400 420">
+            <rect x="0" y="380" width="400" height="40" fill="#2b1055" />
+            <rect x="60" y="110" width="300" height="270" fill="#fff8ec" stroke="#2b1055" stroke-width="8" />
+            <rect x="90" y="60" width="240" height="56" fill="#2b1055" />
+            <text x="210" y="100" text-anchor="middle" font-family="Fira Sans Condensed" font-weight="700" font-size="36" letter-spacing="4" fill="#fff8ec">BAKKAL</text>
+            <g><rect x="60" y="116" width="50" height="50" fill="#ff5e5b" /><rect x="110" y="116" width="50" height="50" fill="#fff8ec" /><rect x="160" y="116" width="50" height="50" fill="#ff5e5b" /><rect x="210" y="116" width="50" height="50" fill="#fff8ec" /><rect x="260" y="116" width="50" height="50" fill="#ff5e5b" /><rect x="310" y="116" width="50" height="50" fill="#fff8ec" /></g>
+            <rect x="85" y="200" width="130" height="100" fill="#ffd23f" stroke="#2b1055" stroke-width="6" />
+            <rect x="250" y="220" width="80" height="160" fill="#2b1055" />
+            <line x1="26" y1="380" x2="26" y2="250" stroke="#2b1055" stroke-width="14" /><circle cx="26" cy="200" r="62" fill="#2b1055" /><circle cx="26" cy="200" r="50" fill="#ffd23f" />
+            <circle cx="150" cy="356" r="22" fill="#fff8ec" stroke="#2b1055" stroke-width="6" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- 7.4-9.8 the ball still hits that wall -->
+      <div id="b4" class="scene clip" data-start="7" data-duration="2.2" data-track-index="2">
+        <div id="b4-head" class="abs head" style="top: 360px; font-size: 92px">TOP HÂLÂ O DUVARA ÇARPIYOR</div>
+        <svg id="b4-wall" class="abs" style="left: 760px; top: 700px" width="320" height="400" viewBox="0 0 320 400">
+          <rect width="320" height="400" fill="#ff5e5b" />
+          <g stroke="#fff8ec" stroke-width="6">
+            <line x1="0" y1="66" x2="320" y2="66" /><line x1="0" y1="133" x2="320" y2="133" /><line x1="0" y1="200" x2="320" y2="200" /><line x1="0" y1="266" x2="320" y2="266" /><line x1="0" y1="333" x2="320" y2="333" />
+            <line x1="80" y1="0" x2="80" y2="66" /><line x1="200" y1="0" x2="200" y2="66" /><line x1="140" y1="66" x2="140" y2="133" /><line x1="260" y1="66" x2="260" y2="133" />
+            <line x1="80" y1="133" x2="80" y2="200" /><line x1="200" y1="133" x2="200" y2="200" /><line x1="140" y1="200" x2="140" y2="266" /><line x1="260" y1="200" x2="260" y2="266" />
+            <line x1="80" y1="266" x2="80" y2="333" /><line x1="200" y1="266" x2="200" y2="333" /><line x1="140" y1="333" x2="140" y2="400" /><line x1="260" y1="333" x2="260" y2="400" />
+          </g>
+        </svg>
+        <div id="b4-ground" class="abs" style="left: 0; top: 1096px; width: 1080px; height: 10px; background: var(--cream); opacity: 0.6"></div>
+        <svg id="b4-ball" class="abs" style="left: 120px; top: 950px" width="146" height="146" viewBox="-73 -73 146 146">
+          <circle r="68" fill="#fff8ec" stroke="#2b1055" stroke-width="6" />
+          <polygon points="0,-22 21,-7 13,18 -13,18 -21,-7" fill="#2b1055" />
+          <g stroke="#2b1055" stroke-width="5"><line x1="0" y1="-22" x2="0" y2="-66" /><line x1="21" y1="-7" x2="62" y2="-22" /><line x1="13" y1="18" x2="40" y2="54" /><line x1="-13" y1="18" x2="-40" y2="54" /><line x1="-21" y1="-7" x2="-62" y2="-22" /></g>
+        </svg>
+      </div>
+
+      <!-- 9.8-12.0 the only change -->
+      <div id="b5" class="scene clip" data-start="9.2" data-duration="2.1" data-track-index="2">
+        <div id="b5-tag" class="abs head" style="top: 360px; font-size: 60px; color: var(--yellow)">DEĞİŞEN TEK ŞEY:</div>
+        <div id="b5-head" class="abs head" style="top: 470px; font-size: 80px">ARTIK EVE ERKEN DÖNMEK ZORUNDA DEĞİLİZ</div>
+        <svg id="b5-moon" class="abs" style="left: 440px; top: 880px" width="200" height="200" viewBox="0 0 200 200">
+          <path d="M120,20 a80,80 0 1,0 60,130 a64,64 0 1,1 -60,-130 Z" fill="#ffd23f" />
+        </svg>
+        <svg id="b5-stars" class="abs" style="left: 200px; top: 880px" width="680" height="220" viewBox="0 0 680 220">
+          <g fill="#fff8ec"><circle cx="40" cy="60" r="8" /><circle cx="140" cy="170" r="6" /><circle cx="560" cy="40" r="8" /><circle cx="640" cy="160" r="6" /><circle cx="490" cy="190" r="5" /></g>
+        </svg>
+      </div>
+
+      <!-- 12.0-13.0 question + wordmark -->
+      <div id="b6" class="scene clip" data-start="11.3" data-duration="1.7" data-track-index="2">
+        <div id="b6-head" class="abs head" style="top: 420px; font-size: 92px; color: var(--yellow)">SEN HANGİ KÖŞEYE GERİ DÖNERDİN?</div>
+        <div id="wordmark" class="abs" style="top: 940px">DOKSANLAND</div>
+      </div>
+
+      <!-- bulletin chrome, on screen the whole time -->
+      <div id="topbar" class="abs clip" data-start="0" data-duration="13" data-track-index="3">
+        <div id="show">DOKSANLAND BÜLTENİ</div>
+        <div id="clock">09<span id="colon">:</span>30</div>
+      </div>
+      <div id="lower" class="abs clip" data-start="0" data-duration="13" data-track-index="4">
+        <div id="lt-a">HABER BÜLTENİ</div>
+        <div id="lt-b">AYNI KÖŞE, YILLAR SONRA</div>
+      </div>
+      <div id="ticker" class="abs clip" data-start="0" data-duration="13" data-track-index="5">
+        <div id="tk-label" data-layout-allow-overlap data-layout-allow-occlusion>BÜLTEN</div>
+        <div id="tk-text" data-layout-allow-overlap data-layout-allow-occlusion>MUHABİRİMİZ MAHALLEDE · TOP DUVARA DEĞDİ · ANNE BİR SAAT DAHA · MUHABİRİMİZ MAHALLEDE · TOP DUVARA DEĞDİ · ANNE BİR SAAT DAHA · MUHABİRİMİZ MAHALLEDE · TOP DUVARA DEĞDİ · ANNE BİR SAAT DAHA ·</div>
+      </div>
+      <div id="scan" class="full clip" data-start="0" data-duration="13" data-track-index="6" data-layout-ignore></div>
+
+      <audio id="music" src="assets/music.wav" data-start="0" data-duration="13" data-volume="1" data-fade-out="0.8" data-track-index="7"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const B = 0.5;
+      // chrome
+      tl.fromTo("#clock", { scale: 1.08 }, { scale: 1, duration: 0.3, ease: "power3.out" }, 0);
+      for (let s = 1; s < 13; s++) { tl.set("#colon", { opacity: 0.35 }, s - 0.5); tl.set("#colon", { opacity: 1 }, s); }
+      tl.fromTo("#lt-a", { scaleX: 0.9 }, { scaleX: 1, duration: 0.3, ease: "back.out(2)", transformOrigin: "0% 50%" }, 0);
+      tl.fromTo("#tk-text", { x: 220 }, { x: -2950, duration: 13, ease: "none" }, 0);
+      // b1: hook legible on frame 0
+      tl.fromTo("#b1-head", { scale: 1.12 }, { scale: 1, duration: 0.3, ease: "power3.out" }, 0);
+      tl.fromTo("#b1-tag", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" }, 0.05);
+      tl.fromTo("#b1-bar1", { x: -1080 }, { x: 0, duration: 0.35, ease: "power3.out" }, 0);
+      tl.fromTo("#b1-bar2", { x: 1080 }, { x: 0, duration: 0.35, ease: "power3.out" }, 0.05);
+      // b2
+      tl.fromTo("#b2-head", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 2.6);
+      tl.fromTo("#b2-p1", { x: -500, rotation: -20 }, { x: 0, rotation: -6, duration: 0.45, ease: "back.out(1.6)" }, 2.75);
+      tl.fromTo("#b2-p2", { x: 500, rotation: 20 }, { x: 0, rotation: 5, duration: 0.45, ease: "back.out(1.6)" }, 3.1);
+      tl.fromTo("#b2-arrow", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2.5)" }, 3.55);
+      tl.to("#b2-arrow", { x: 14, duration: 0.25, yoyo: true, repeat: 3, ease: "sine.inOut" }, 3.85);
+      // b3: split screen
+      tl.fromTo("#b3-head", { scale: 1.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: "power3.out" }, 4.7);
+      tl.fromTo("#b3-left", { y: 700 }, { y: 0, duration: 0.4, ease: "power3.out" }, 4.75);
+      tl.fromTo("#b3-right", { y: 700 }, { y: 0, duration: 0.4, ease: "power3.out" }, 5.1);
+      // b4: the ball hits the wall on every beat
+      tl.fromTo("#b4-head", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 7.0);
+      tl.set("#b4-ball", { x: 0, rotation: 0, scaleX: 1, transformOrigin: "50% 50%" }, 7.0);
+      tl.set("#b4-wall", { x: 0 }, 7.0);
+      let rot = 0;
+      for (let i = 0; i < 4; i++) {
+        const t = 7.05 + i * B;
+        rot += 220;
+        tl.to("#b4-ball", { x: 494, rotation: rot, duration: 0.24, ease: "power1.in" }, t);
+        tl.to("#b4-ball", { scaleX: 0.8, duration: 0.03 }, t + 0.24);
+        tl.to("#b4-ball", { scaleX: 1, duration: 0.04 }, t + 0.27);
+        rot -= 160;
+        tl.to("#b4-ball", { x: 140, rotation: rot, duration: 0.18, ease: "power1.out" }, t + 0.31);
+        tl.to("#b4-wall", { x: 10, duration: 0.04, ease: "none" }, t + 0.24);
+        tl.to("#b4-wall", { x: 0, duration: 0.05, ease: "none" }, t + 0.28);
+      }
+      // b5
+      tl.fromTo("#b5-tag", { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.25, ease: "power3.out" }, 9.2);
+      tl.fromTo("#b5-head", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 9.35);
+      tl.fromTo("#b5-moon", { y: 180, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 9.45);
+      tl.fromTo("#b5-stars", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 9.8);
+      tl.to("#b5-stars", { opacity: 0.4, duration: 0.25, yoyo: true, repeat: 3, ease: "sine.inOut" }, 10.2);
+      // b6
+      tl.fromTo("#b6-head", { scale: 1.15, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: "power3.out" }, 11.3);
+      tl.fromTo("#wordmark", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 11.5);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

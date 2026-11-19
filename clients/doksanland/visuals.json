@@ -31,8 +31,8 @@
     "kind": "text",
     "bg": "yellow",
     "kicker": "İlk soru senden",
-    "title": "Çocukluğunun en sevdiğin küçük mutluluğu neydi?",
-    "sub": "Cevabını yorumlara bırak, en güzelleri bir sonraki postta.",
+    "title": "Çocukluğunda en sevdiğin küçük mutluluk neydi?",
+    "sub": "Cevabını yorumlara bırak, en güzellerini paylaşacağız.",
     "count": "3/3"
   },
   {
@@ -41,7 +41,7 @@
     "kind": "chart",
     "bg": "teal",
     "series": "Teneffüs",
-    "kicker": "Bilimsel çalışma",
+    "kicker": "Tamamen bilimsel",
     "title": "Teneffüs zili: dakika dakika enerji",
     "points": [
       {
@@ -70,19 +70,19 @@
     "id": "d02b-1",
     "format": "post",
     "kind": "tazo",
-    "bg": "plum",
+    "bg": "teal",
     "vhs": true,
     "kicker": "Doksanland Tazoları",
     "number": 1,
-    "title": "Cipsten çıkan tazo",
-    "sub": "Nadirlik: paketi ilk açan bilir"
+    "title": "Sobe!",
+    "sub": "Saklambaç · Nadirlik: son saklanan bilir"
   },
   {
     "id": "d02c-1",
     "format": "post",
     "kind": "quote",
     "bg": "cream",
-    "kicker": "90 doğumluların sorusu",
+    "kicker": "90'lar doğumluların sorusu",
     "quote": "90'larda doğanlar olarak hiçbirimiz yaşımızı göstermiyoruz. Bizden önceki nesil bu yaşlardayken gayet olgun duruyordu ama biz hala 20 lerin başında gibi duruyoruz. Bizden sonraki nesil de büyük duruyor ama biz nedense küçük duruyoruz. Anlam veremiyorum buna. Ne ara 30 olduk sahi?",
     "handle": "@birboredkiz",
     "credit": "@birboredkiz"
@@ -160,7 +160,7 @@
     "kind": "quote",
     "bg": "cream",
     "kicker": "Türk annesi sınır tanımaz",
-    "quote": "Merhaba. Annem Londra'da ve bir Türk annesi olarak elbette ki bana atlet almaya çalışıyor. Tatlılığına tahammül edemeyip ifşa ettim.",
+    "quote": "Merhaba. Annem Londra'da ve bir Türk annesi olarak elbette ki bana atlet almaya çalışıyor. (…)",
     "handle": "@nidadincturk",
     "credit": "@nidadincturk"
   }

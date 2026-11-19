@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Unbounded"; font-weight: 900; src: url("assets/fonts/unbounded-latin-900-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+      @font-face { font-family: "Unbounded"; font-weight: 900; src: url("assets/fonts/unbounded-latin-ext-900-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+      @font-face { font-family: "Unbounded"; font-weight: 800; src: url("assets/fonts/unbounded-latin-800-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+      @font-face { font-family: "Unbounded"; font-weight: 800; src: url("assets/fonts/unbounded-latin-ext-800-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+      @font-face { font-family: "Fira Sans Condensed"; font-weight: 500; src: url("assets/fonts/fira-sans-condensed-latin-500-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+      @font-face { font-family: "Fira Sans Condensed"; font-weight: 500; src: url("assets/fonts/fira-sans-condensed-latin-ext-500-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+      @font-face { font-family: "Fira Sans Condensed"; font-weight: 700; src: url("assets/fonts/fira-sans-condensed-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+      @font-face { font-family: "Fira Sans Condensed"; font-weight: 700; src: url("assets/fonts/fira-sans-condensed-latin-ext-700-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+      :root { --plum: #2b1055; --cream: #fff8ec; --yellow: #ffd23f; --coral: #ff5e5b; --teal: #1fb5a3; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--plum); }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: "Fira Sans Condensed", sans-serif; }
+      .scene { position: absolute; inset: 0; overflow: hidden; }
+      .abs { position: absolute; }
+      .tag { left: 0; width: 1080px; text-align: center; font: 700 40px/1 "Fira Sans Condensed"; letter-spacing: 0.22em; }
+      .head { left: 90px; width: 900px; text-align: center; font: 900 96px/1.02 "Unbounded"; letter-spacing: -0.03em; text-wrap: balance; }
+      #s1 { background: var(--plum); } #s2 { background: var(--coral); } #s3 { background: var(--cream); }
+      #s4 { background: var(--yellow); } #s5 { background: var(--teal); } #s6 { background: var(--cream); }
+      .car .body { fill: var(--car); }
+      .dots span { display: inline-block; width: 44px; height: 44px; margin: 0 14px; border-radius: 50%; background: var(--plum); }
+      #wordmark { left: 0; width: 1080px; text-align: center; font: 800 44px/1 "Unbounded"; letter-spacing: 0.14em; color: var(--plum); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1920" data-fps="30">
+
+      <!-- 0.0-2.0 night, the car slides in, stars fade -->
+      <div id="s1" class="scene clip" data-start="0" data-duration="2" data-track-index="0">
+        <div id="s1-stars" class="abs" style="left: 0; top: 0; width: 1080px; height: 1400px">
+          <svg width="1080" height="1400" viewBox="0 0 1080 1400">
+            <g fill="#fff8ec">
+              <circle cx="120" cy="700" r="7" /><circle cx="260" cy="760" r="5" /><circle cx="400" cy="690" r="8" /><circle cx="560" cy="780" r="5" />
+              <circle cx="690" cy="700" r="7" /><circle cx="960" cy="740" r="6" /><circle cx="180" cy="880" r="5" /><circle cx="470" cy="900" r="6" />
+              <circle cx="640" cy="880" r="5" /><circle cx="900" cy="900" r="7" /><circle cx="80" cy="240" r="5" /><circle cx="1000" cy="260" r="6" />
+            </g>
+            <path d="M880,640 a70,70 0 1,0 60,110 a56,56 0 1,1 -60,-110 Z" fill="#ffd23f" />
+          </svg>
+        </div>
+        <div id="s1-road" class="abs" style="left: 0; top: 1240px; width: 1080px; height: 90px; background: #1d0a3d"></div>
+        <svg id="s1-lane" class="abs" style="left: 0; top: 1280px" width="2160" height="10" viewBox="0 0 2160 10"><line x1="0" y1="5" x2="2160" y2="5" stroke="#fff8ec" stroke-width="8" stroke-dasharray="60 50" /></svg>
+        <div id="s1-tag" class="abs tag" style="top: 280px; color: var(--yellow)">YAZLIĞA YOLCULUK</div>
+        <div id="s1-head" class="abs head" style="top: 350px; color: var(--cream)">SABAH BEŞTE YOLA ÇIKILIRDI</div>
+        <svg id="s1-car" class="abs car" style="left: 330px; top: 1030px; --car: #ffd23f" width="420" height="230" viewBox="0 0 420 230">
+          <polygon points="110,92 150,30 300,30 345,92" fill="#2b1055" />
+          <polygon points="130,88 160,44 218,44 218,88" fill="#1fb5a3" /><polygon points="232,88 232,44 290,44 322,88" fill="#1fb5a3" />
+          <rect class="body" x="10" y="88" width="400" height="96" rx="30" />
+          <rect x="384" y="112" width="26" height="20" rx="6" fill="#fff8ec" />
+          <g class="w1"><circle cx="100" cy="184" r="40" fill="#2b1055" /><circle cx="100" cy="184" r="16" fill="#fff8ec" /><rect x="96" y="148" width="8" height="72" fill="#fff8ec" /></g>
+          <g class="w2"><circle cx="320" cy="184" r="40" fill="#2b1055" /><circle cx="320" cy="184" r="16" fill="#fff8ec" /><rect x="316" y="148" width="8" height="72" fill="#fff8ec" /></g>
+        </svg>
+      </div>
+
+      <!-- 2.0-3.8 the boot is full: bags drop, lid wobbles -->
+      <div id="s2" class="scene clip" data-start="2" data-duration="1.8" data-track-index="0">
+        <div id="s2-head" class="abs head" style="top: 330px; color: var(--plum)">BAGAJ TIKA BASA DOLU</div>
+        <svg id="s2-car" class="abs car" style="left: 330px; top: 1030px; --car: #ffd23f" width="420" height="230" viewBox="0 0 420 230">
+          <polygon points="110,92 150,30 300,30 345,92" fill="#2b1055" />
+          <polygon points="130,88 160,44 218,44 218,88" fill="#1fb5a3" /><polygon points="232,88 232,44 290,44 322,88" fill="#1fb5a3" />
+          <rect x="140" y="22" width="170" height="10" fill="#2b1055" />
+          <rect class="body" x="10" y="88" width="400" height="96" rx="30" />
+          <rect x="384" y="112" width="26" height="20" rx="6" fill="#fff8ec" />
+          <g class="w1"><circle cx="100" cy="184" r="40" fill="#2b1055" /><circle cx="100" cy="184" r="16" fill="#fff8ec" /></g>
+          <g class="w2"><circle cx="320" cy="184" r="40" fill="#2b1055" /><circle cx="320" cy="184" r="16" fill="#fff8ec" /></g>
+        </svg>
+        <svg id="s2-lid" class="abs" style="left: 316px; top: 1100px" width="90" height="40" viewBox="0 0 90 40"><rect x="4" y="6" width="82" height="28" rx="10" fill="#2b1055" /></svg>
+        <div id="s2-bag1" class="abs" style="left: 470px; top: 930px; width: 150px; height: 100px; background: var(--teal); border: 8px solid var(--plum); border-radius: 18px"></div>
+        <div id="s2-bag2" class="abs" style="left: 500px; top: 834px; width: 110px; height: 84px; background: var(--cream); border: 8px solid var(--plum); border-radius: 18px"></div>
+        <div id="s2-bag3" class="abs" style="left: 520px; top: 762px; width: 80px; height: 74px; background: var(--plum); border-radius: 40px 40px 14px 14px"></div>
+        <div id="s2-bag4" class="abs" style="left: 600px; top: 960px; width: 110px; height: 70px; background: var(--plum); border-radius: 14px"></div>
+      </div>
+
+      <!-- 3.8-5.6 "Daha çok var mı?" x3, bigger each time -->
+      <div id="s3" class="scene clip" data-start="3.8" data-duration="1.8" data-track-index="0">
+        <div id="s3-a" class="abs head" style="top: 330px; font-size: 54px; color: var(--plum)">DAHA ÇOK VAR MI?</div>
+        <div id="s3-b" class="abs head" style="top: 440px; font-size: 76px; color: var(--plum)">DAHA ÇOK VAR MI?</div>
+        <div id="s3-c" class="abs head" style="top: 640px; font-size: 128px; line-height: 1; color: var(--plum)">DAHA ÇOK VAR MI?</div>
+        <div id="s3-dots" class="abs dots" style="left: 0; top: 1020px; width: 1080px; text-align: center">
+          <span id="s3-d1"></span><span id="s3-d2"></span><span id="s3-d3"></span>
+        </div>
+      </div>
+
+      <!-- 5.6-7.4 race: dashed arcs fly right -->
+      <div id="s4" class="scene clip" data-start="5.6" data-duration="1.8" data-track-index="0">
+        <div id="s4-head" class="abs head" style="top: 330px; color: var(--plum)">DENİZİ İLK GÖREN KAZANIR</div>
+        <svg id="s4-arcs" class="abs" style="left: 0; top: 820px" width="1080" height="440" viewBox="0 0 1080 440">
+          <path id="s4-a1" d="M-40,120 Q400,-20 1120,90" fill="none" stroke="#2b1055" stroke-width="12" stroke-linecap="round" stroke-dasharray="60 46" />
+          <path id="s4-a2" d="M-40,250 Q480,140 1120,230" fill="none" stroke="#ff5e5b" stroke-width="12" stroke-linecap="round" stroke-dasharray="40 40" />
+          <path id="s4-a3" d="M-40,400 Q520,300 1120,380" fill="none" stroke="#2b1055" stroke-width="12" stroke-linecap="round" stroke-dasharray="80 50" />
+        </svg>
+        <svg id="s4-car" class="abs car" style="left: 330px; top: 1000px; --car: #ff5e5b" width="420" height="230" viewBox="0 0 420 230">
+          <polygon points="110,92 150,30 300,30 345,92" fill="#2b1055" />
+          <polygon points="130,88 160,44 218,44 218,88" fill="#fff8ec" /><polygon points="232,88 232,44 290,44 322,88" fill="#fff8ec" />
+          <rect class="body" x="10" y="88" width="400" height="96" rx="30" />
+          <rect x="384" y="112" width="26" height="20" rx="6" fill="#ffd23f" />
+          <g class="w1"><circle cx="100" cy="184" r="40" fill="#2b1055" /><circle cx="100" cy="184" r="16" fill="#fff8ec" /><rect x="96" y="148" width="8" height="72" fill="#fff8ec" /></g>
+          <g class="w2"><circle cx="320" cy="184" r="40" fill="#2b1055" /><circle cx="320" cy="184" r="16" fill="#fff8ec" /><rect x="316" y="148" width="8" height="72" fill="#fff8ec" /></g>
+        </svg>
+      </div>
+
+      <!-- 7.4-9.6 the sea: sun pops, waves rise -->
+      <div id="s5" class="scene clip" data-start="7.4" data-duration="2.2" data-track-index="0">
+        <svg id="s5-sun" class="abs" style="left: 340px; top: 600px" width="400" height="400" viewBox="-200 -200 400 400">
+          <g fill="#ffd23f"><rect x="-10" y="-195" width="20" height="60" rx="10" /><rect x="-10" y="-195" width="20" height="60" rx="10" transform="rotate(45)" />
+            <rect x="-10" y="-195" width="20" height="60" rx="10" transform="rotate(90)" /><rect x="-10" y="-195" width="20" height="60" rx="10" transform="rotate(135)" />
+            <rect x="-10" y="-195" width="20" height="60" rx="10" transform="rotate(180)" /><rect x="-10" y="-195" width="20" height="60" rx="10" transform="rotate(225)" />
+            <rect x="-10" y="-195" width="20" height="60" rx="10" transform="rotate(270)" /><rect x="-10" y="-195" width="20" height="60" rx="10" transform="rotate(315)" /></g>
+          <circle r="115" fill="#ffd23f" stroke="#2b1055" stroke-width="8" />
+        </svg>
+        <div id="s5-head" class="abs head" style="top: 330px; color: var(--plum)">VE DENİZ GÖRÜNDÜ</div>
+        <svg id="s5-w1" class="abs" style="left: 0; top: 960px" width="2160" height="960" viewBox="0 0 2160 960"><path d="M0,60 Q135,0 270,60 T540,60 T810,60 T1080,60 T1350,60 T1620,60 T1890,60 T2160,60 L2160,960 L0,960 Z" fill="#fff8ec" opacity="0.55" /></svg>
+        <svg id="s5-w2" class="abs" style="left: 0; top: 1060px" width="2160" height="860" viewBox="0 0 2160 860"><path d="M0,60 Q135,0 270,60 T540,60 T810,60 T1080,60 T1350,60 T1620,60 T1890,60 T2160,60 L2160,860 L0,860 Z" fill="#fff8ec" /></svg>
+        <svg id="s5-w3" class="abs" style="left: 0; top: 1180px" width="2160" height="740" viewBox="0 0 2160 740"><path d="M0,60 Q135,0 270,60 T540,60 T810,60 T1080,60 T1350,60 T1620,60 T1890,60 T2160,60 L2160,740 L0,740 Z" fill="#2b1055" /></svg>
+      </div>
+
+      <!-- 9.6-12.0 summer will come again + wordmark -->
+      <div id="s6" class="scene clip" data-start="9.6" data-duration="2.4" data-track-index="0">
+        <div id="s6-head" class="abs head" style="top: 330px; color: var(--plum)">YAZ YİNE GELECEK</div>
+        <svg id="s6-sun" class="abs" style="left: 600px; top: 570px" width="240" height="240" viewBox="-200 -200 400 400">
+          <g fill="#ffd23f" stroke="#2b1055" stroke-width="6"><rect x="-14" y="-195" width="28" height="60" rx="14" /><rect x="-14" y="-195" width="28" height="60" rx="14" transform="rotate(60)" />
+            <rect x="-14" y="-195" width="28" height="60" rx="14" transform="rotate(120)" /><rect x="-14" y="-195" width="28" height="60" rx="14" transform="rotate(180)" />
+            <rect x="-14" y="-195" width="28" height="60" rx="14" transform="rotate(240)" /><rect x="-14" y="-195" width="28" height="60" rx="14" transform="rotate(300)" /></g>
+          <circle r="115" fill="#ffd23f" stroke="#2b1055" stroke-width="10" />
+        </svg>
+        <svg id="s6-car" class="abs car" style="left: 280px; top: 750px; --car: #ff5e5b" width="420" height="230" viewBox="0 0 420 230">
+          <polygon points="110,92 150,30 300,30 345,92" fill="#2b1055" />
+          <polygon points="130,88 160,44 218,44 218,88" fill="#1fb5a3" /><polygon points="232,88 232,44 290,44 322,88" fill="#1fb5a3" />
+          <rect class="body" x="10" y="88" width="400" height="96" rx="30" />
+          <rect x="384" y="112" width="26" height="20" rx="6" fill="#ffd23f" />
+          <g class="w1"><circle cx="100" cy="184" r="40" fill="#2b1055" /><circle cx="100" cy="184" r="16" fill="#fff8ec" /></g>
+          <g class="w2"><circle cx="320" cy="184" r="40" fill="#2b1055" /><circle cx="320" cy="184" r="16" fill="#fff8ec" /></g>
+        </svg>
+        <svg id="s6-sea" class="abs" style="left: 0; top: 1000px" width="2160" height="120" viewBox="0 0 2160 120"><path d="M0,40 Q135,0 270,40 T540,40 T810,40 T1080,40 T1350,40 T1620,40 T1890,40 T2160,40 L2160,120 L0,120 Z" fill="#1fb5a3" /></svg>
+        <div id="wordmark" class="abs" style="top: 1150px">DOKSANLAND</div>
+      </div>
+
+      <audio id="music" src="assets/music.wav" data-start="0" data-duration="12" data-volume="1" data-fade-out="0.8" data-track-index="1"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const B = 0.5;
+      const spin = (sel, t, d, turns) => tl.fromTo(sel + " .w1, " + sel + " .w2", { rotation: 0 }, { rotation: 360 * turns, duration: d, ease: "power1.out", transformOrigin: "50% 50%" }, t);
+      // s1: hook legible on frame 0
+      tl.fromTo("#s1-head", { scale: 1.12 }, { scale: 1, duration: 0.3, ease: "power3.out" }, 0);
+      tl.fromTo("#s1-tag", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" }, 0.1);
+      tl.fromTo("#s1-car", { x: -760 }, { x: 0, duration: 1.1, ease: "power3.out" }, 0.15);
+      spin("#s1-car", 0.15, 1.1, 3);
+      tl.fromTo("#s1-lane", { x: 0 }, { x: -440, duration: 2, ease: "power2.out" }, 0);
+      tl.fromTo("#s1-stars", { opacity: 1 }, { opacity: 0.15, duration: 1.6, ease: "power1.in" }, 0.4);
+      tl.fromTo("#s1-car", { y: 0 }, { y: -8, duration: 0.12, yoyo: true, repeat: 3, ease: "sine.inOut" }, 1.25);
+      // s2: bags drop one by one, boot lid wobbles
+      tl.fromTo("#s2-head", { scale: 1.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: "power3.out" }, 2);
+      ["#s2-bag1", "#s2-bag4", "#s2-bag2", "#s2-bag3"].forEach((b, i) => {
+        tl.fromTo(b, { y: -700, rotation: (i % 2 ? 12 : -10) }, { y: 0, rotation: (i % 2 ? 3 : -2), duration: 0.32, ease: "bounce.out" }, 2.1 + i * 0.25);
+      });
+      tl.fromTo("#s2-car", { scaleY: 1 }, { scaleY: 0.94, duration: 0.08, yoyo: true, repeat: 5, ease: "sine.inOut", transformOrigin: "50% 100%" }, 2.4);
+      tl.fromTo("#s2-lid", { rotation: 0 }, { rotation: -24, duration: 0.1, yoyo: true, repeat: 9, ease: "sine.inOut", transformOrigin: "100% 50%" }, 2.7);
+      // s3: three times, louder
+      tl.fromTo("#s3-a", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(2)" }, 3.8);
+      tl.fromTo("#s3-b", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(2)" }, 4.3);
+      tl.fromTo("#s3-c", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.2)" }, 4.8);
+      tl.fromTo("#s3-c", { rotation: -2 }, { rotation: 2, duration: 0.08, yoyo: true, repeat: 5, ease: "none" }, 5.05);
+      ["#s3-d1", "#s3-d2", "#s3-d3"].forEach((d, i) => {
+        tl.fromTo(d, { y: 0 }, { y: -40, duration: 0.15, yoyo: true, repeat: 5, ease: "sine.out" }, 3.8 + i * 0.1);
+      });
+      // s4: race
+      tl.fromTo("#s4-head", { x: -80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.25, ease: "power3.out" }, 5.6);
+      tl.fromTo("#s4-a1", { strokeDashoffset: 0 }, { strokeDashoffset: -900, duration: 1.8, ease: "none" }, 5.6);
+      tl.fromTo("#s4-a2", { strokeDashoffset: 0 }, { strokeDashoffset: -1300, duration: 1.8, ease: "none" }, 5.6);
+      tl.fromTo("#s4-a3", { strokeDashoffset: 0 }, { strokeDashoffset: -1100, duration: 1.8, ease: "none" }, 5.6);
+      tl.fromTo("#s4-arcs", { x: -300, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, 5.6);
+      tl.fromTo("#s4-car", { x: -200, y: 0 }, { x: 140, y: -10, duration: 1.8, ease: "power1.inOut" }, 5.6);
+      spin("#s4-car", 5.6, 1.8, 6);
+      // s5: the sea
+      tl.fromTo("#s5-head", { scale: 1.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2)" }, 7.4);
+      tl.fromTo("#s5-w1", { y: 900, x: 0 }, { y: 0, x: -540, duration: 2.2, ease: "power2.out" }, 7.4);
+      tl.fromTo("#s5-w2", { y: 900, x: -270 }, { y: 0, x: 0, duration: 2.0, ease: "power2.out" }, 7.45);
+      tl.fromTo("#s5-w3", { y: 800, x: 0 }, { y: 0, x: -400, duration: 1.9, ease: "power2.out" }, 7.55);
+      tl.fromTo("#s5-sun", { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2.4)" }, 7.65);
+      tl.to("#s5-sun", { rotation: 30, duration: 1.4, ease: "none" }, 8.15);
+      // s6: bob + wordmark
+      tl.fromTo("#s6-head", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 9.6);
+      tl.fromTo("#s6-car", { y: 0 }, { y: -16, duration: B, yoyo: true, repeat: 4, ease: "sine.inOut" }, 9.6);
+      tl.fromTo("#s6-sun", { y: 0, rotation: 0 }, { y: -24, rotation: 40, duration: B * 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 9.6);
+      tl.fromTo("#s6-sea", { x: 0 }, { x: -540, duration: 2.4, ease: "none" }, 9.6);
+      tl.fromTo("#wordmark", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 9.9);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

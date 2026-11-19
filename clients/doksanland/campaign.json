@@ -13,7 +13,7 @@
       "format": "carousel",
       "mode": "auto",
       "title": "Doksanland'a hoş geldin (welcome carousel)",
-      "caption_tr": "Doksanland'a hoş geldin. 🎡\nBurası küçük mutlulukların tema parkı: teneffüs zili, cips paketinden çıkan tazo, cumartesi sabahı çizgi filmleri.\nBilet yok, giriş serbest.\nİlk soru senden: çocukluğunun en sevdiğin küçük mutluluğu neydi? 👇",
+      "caption_tr": "Doksanland'a hoş geldin. 🎡\nBurası küçük mutlulukların tema parkı: teneffüs zili, cips paketinden çıkan tazo, cumartesi sabahı çizgi filmleri.\nBilet yok, giriş serbest.\nİlk soru senden: çocukluğunda en sevdiğin küçük mutluluk neydi? 👇",
       "visuals": [
         "d01a-1",
         "d01a-2",
@@ -21,7 +21,7 @@
       ],
       "credit": null,
       "needs": [],
-      "status": "draft",
+      "status": "ready",
       "approval": {
         "bertug": null
       }
@@ -35,13 +35,13 @@
       "format": "post",
       "mode": "auto",
       "title": "Teneffüs zili: dakika dakika enerji (chart joke)",
-      "caption_tr": "bilimsel olarak kanıtlanmış en hızlı enerji artışı: teneffüs zili.\nsonra 9. dakikada gelen o hüzün…\no sınıf arkadaşını etiketle.",
+      "caption_tr": "tamamen bilimsel olarak kanıtlanmış en hızlı enerji artışı: teneffüs zili.\nsonra 9. dakikada gelen o hüzün…\no sınıf arkadaşını etiketle.",
       "visuals": [
         "d01b-1"
       ],
       "credit": null,
       "needs": [],
-      "status": "draft",
+      "status": "ready",
       "approval": {
         "bertug": null
       }
@@ -60,11 +60,8 @@
         "video:reel-d01c"
       ],
       "credit": null,
-      "needs": [
-        "video desk: original AI pack-opening footage (no real brand or logo)",
-        "royalty-free sound"
-      ],
-      "status": "draft",
+      "needs": [],
+      "status": "ready",
       "approval": {
         "bertug": null
       },
@@ -110,10 +107,8 @@
         "video:reel-d02a"
       ],
       "credit": null,
-      "needs": [
-        "video desk: motion typography + original chiptune (6 beats, payoff 'Ve deniz göründü' at ~7.4 s)"
-      ],
-      "status": "draft",
+      "needs": [],
+      "status": "ready",
       "approval": {
         "bertug": null
       },
@@ -164,14 +159,14 @@
       "channel": "instagram",
       "format": "post",
       "mode": "auto",
-      "title": "Doksanland Tazoları #1: Cipsten çıkan tazo",
-      "caption_tr": "Doksanland Tazoları #1: cips paketinin dibinden çıkan o tazo.\npaketi açınca önce cipse değil, tazoya bakılırdı. hangisi çıktı, sende var mıydı, takas eder miyiz…\nyeni tazolar yolda. kaydet, seti tamamla.",
+      "title": "Doksanland Tazoları #01: Sobe!",
+      "caption_tr": "Doksanland Tazoları #01: saklambaçta \"sobe!\" diye bağırdığın o an.\nebe saymaya başlayınca en iyi saklanma yeri hep doluydu. bir de son anda \"önüm arkam sağım solum sobe\" diyen arkadaş…\nkaydet, seti tamamla.",
       "visuals": [
         "d02b-1"
       ],
       "credit": null,
       "needs": [],
-      "status": "draft",
+      "status": "ready",
       "approval": {
         "bertug": null
       }
@@ -185,7 +180,7 @@
       "format": "post",
       "mode": "auto",
       "title": "Repost: @birboredkiz — Ne ara 30 olduk sahi?",
-      "caption_tr": "ne ara 30 olduk sahi?\naynada hâlâ teneffüse çıkacak gibi duruyoruz, nüfus cüzdanı başka bir şey söylüyor.\no 90 doğumlu arkadaşına gönder.",
+      "caption_tr": "ne ara 30 olduk sahi?\naynada hâlâ teneffüse çıkacak gibi duruyoruz, nüfus cüzdanı başka bir şey söylüyor.\no 90'lar doğumlu arkadaşına gönder.",
       "visuals": [
         "d02c-1"
       ],
@@ -208,15 +203,15 @@
       "format": "reel",
       "mode": "auto",
       "title": "Doksanland Bülteni: Aynı köşe, yıllar sonra",
-      "caption_tr": "aynı köşe, yıllar sonra. internet bu ara eski fotoğraflarının çekildiği yere geri dönüyor.\nbiz de muhabirimizi mahalleye yolladık: top hâlâ aynı duvara çarpıyor.\nsen hangi köşeye geri dönerdin?",
+      "caption_tr": "aynı köşe, yıllar sonra. internet bu hafta eski fotoğraflarının çekildiği yere geri dönüyor.\nbiz de muhabirimizi mahalleye yolladık: top hâlâ aynı duvara çarpıyor.\nsen hangi köşeye geri dönerdin?",
       "visuals": [
         "video:reel-d03a"
       ],
       "credit": null,
       "needs": [
-        "video desk: 90s TV bulletin motion typography (HABER BÜLTENİ lower-third, clock, ticker) + original synth"
+        "Bertuğ: Gündem always needs an explicit yes (alternative on file: GTA VI launch bulletin)"
       ],
-      "status": "draft",
+      "status": "ready",
       "approval": {
         "bertug": null
       },
@@ -272,7 +267,7 @@
       ],
       "credit": null,
       "needs": [],
-      "status": "draft",
+      "status": "ready",
       "approval": {
         "bertug": null
       }
