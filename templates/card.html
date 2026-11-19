@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!--
+Doksanland house template. render.mjs injects one visual from clients/doksanland/visuals.json as window.CARD
+and screenshots .card (1080x1350 for "post", 1080x1920 for "story").
+
+Fields
+  id        visual id (file name)            format   "post" | "story"
+  kind      "cover" | "text" | "list" | "tazo" | "chart"
+  bg        "plum" | "cream" | "yellow" | "coral" | "teal"   (default plum)
+  image     optional background image path, relative to templates/ (e.g. "../assets/ai/x.png")
+  vhs       true = VHS grain + scanlines (nostalgia items only)
+  series    optional series name shown on a round badge (e.g. "Kimler hatırlıyor?")
+  count     optional slide counter, e.g. "2/7"
+  credit    optional "@handle" for curated content (shown as "Kaynak: @handle")
+  kicker    small line above the main text
+  title     main text (cover: hook in caps; text: the line; list/chart: heading; tazo: name)
+  sub       smaller line under the main text
+  items     list: ["...", "..."]
+  number    tazo: collectible number, e.g. 3
+  points    chart: [{"label": "08:00", "value": 20}, ...] (value 0-100)
+-->
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face{font-family:Unbounded;font-weight:900;src:url(fonts/unbounded-latin-900-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Unbounded;font-weight:900;src:url(fonts/unbounded-latin-ext-900-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Unbounded;font-weight:800;src:url(fonts/unbounded-latin-800-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Unbounded;font-weight:800;src:url(fonts/unbounded-latin-ext-800-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Fira;font-weight:500;src:url(fonts/fira-sans-condensed-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Fira;font-weight:500;src:url(fonts/fira-sans-condensed-latin-ext-500-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Fira;font-weight:700;src:url(fonts/fira-sans-condensed-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Fira;font-weight:700;src:url(fonts/fira-sans-condensed-latin-ext-700-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+:root{--plum:#2b1055;--cream:#fff8ec;--yellow:#ffd23f;--coral:#ff5e5b;--teal:#1fb5a3}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#111}
+.card{position:relative;width:1080px;height:1350px;overflow:hidden;font-family:Fira,sans-serif;color:var(--fg);background:var(--bgc)}
+.card.story{height:1920px}
+.t-plum{--bgc:var(--plum);--fg:var(--cream);--acc:var(--yellow)}
+.t-cream{--bgc:var(--cream);--fg:var(--plum);--acc:var(--coral)}
+.t-yellow{--bgc:var(--yellow);--fg:var(--plum);--acc:var(--coral)}
+.t-coral{--bgc:var(--coral);--fg:var(--cream);--acc:var(--yellow)}
+.t-teal{--bgc:var(--teal);--fg:var(--cream);--acc:var(--yellow)}
+.bgimg{position:absolute;inset:0;background-size:cover;background-position:center}
+.bgimg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0000 30%,#1a0a33cc 78%,#1a0a33f2 100%)}
+.has-img{--fg:var(--cream)}
+.vhs::before{content:"";position:absolute;inset:0;z-index:20;pointer-events:none;opacity:.22;mix-blend-mode:overlay;
+ background:repeating-linear-gradient(0deg,#000 0 2px,#0000 2px 5px),url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.wrap{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;padding:96px 84px 150px}
+.bar{position:absolute;z-index:6;left:84px;right:84px;bottom:56px;display:flex;align-items:center;gap:20px;font:700 30px/1 Fira;letter-spacing:.3em;text-transform:uppercase}
+.bar .wm{display:inline-flex;align-items:center;gap:14px}
+.bar .dot{width:22px;height:22px;border-radius:50%;background:var(--acc)}
+.bar .right{margin-left:auto;letter-spacing:.08em;opacity:.85;text-transform:none;font-weight:500}
+.badge{position:absolute;z-index:6;top:64px;right:72px;width:190px;height:190px;border-radius:50%;background:var(--acc);color:var(--plum);
+ display:grid;place-items:center;text-align:center;padding:26px;font:800 25px/1.12 Unbounded;transform:rotate(-8deg);box-shadow:0 0 0 10px #fff3,inset 0 0 0 6px #0002}
+.kicker{font:700 36px/1.2 Fira;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin-bottom:28px}
+.hook{font:900 132px/1.06 Unbounded;letter-spacing:-.035em;text-transform:uppercase;text-wrap:balance}
+.fit{overflow-wrap:normal;word-break:keep-all}
+.sub{margin-top:36px;font:500 46px/1.25 Fira;max-width:860px;text-wrap:pretty}
+.k-cover .wrap{justify-content:flex-end}
+.k-text .wrap{justify-content:center}
+.k-text .line{font:800 84px/1.12 Unbounded;letter-spacing:-.02em;text-wrap:balance}
+.k-list h2{font:900 86px/1.08 Unbounded;letter-spacing:-.03em;text-transform:uppercase;text-wrap:balance;margin:60px 0 56px;max-width:760px}
+.k-list ol{list-style:none;display:flex;flex-direction:column;gap:40px}
+.k-list li{display:flex;gap:28px;align-items:baseline;font:500 58px/1.18 Fira}
+.k-list li b{flex:none;width:76px;height:76px;border-radius:50%;background:var(--acc);color:var(--plum);display:grid;place-items:center;font:900 34px/1 Unbounded;transform:translateY(10px)}
+.k-tazo .wrap{align-items:center;justify-content:center;text-align:center}
+.tazo{width:820px;height:820px;border-radius:50%;background:var(--acc);color:var(--plum);display:flex;flex-direction:column;align-items:center;justify-content:center;
+ padding:110px;box-shadow:0 0 0 22px var(--fg),0 0 0 34px var(--acc),0 30px 80px #0006;position:relative}
+.tazo::before{content:"";position:absolute;inset:38px;border-radius:50%;border:6px dashed #2b105555}
+.tazo .no{font:900 64px/1 Unbounded;letter-spacing:.04em;margin-bottom:26px}
+.tazo .nm{font:900 84px/1.08 Unbounded;letter-spacing:-.03em;text-transform:uppercase;text-wrap:balance}
+.tazo .tx{margin-top:24px;font:500 40px/1.2 Fira;text-wrap:balance}
+.k-tazo .kicker{margin-bottom:60px}
+.k-chart h2{font:900 80px/1.08 Unbounded;letter-spacing:-.03em;text-transform:uppercase;text-wrap:balance;margin:60px 0 40px;max-width:780px}
+.k-chart svg{flex:1;width:100%}
+.story .wrap{padding:220px 84px 260px}
+.story .bar{bottom:150px}
+.story .badge{top:170px}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const c = window.CARD || { id: 'demo', format: 'post', kind: 'cover', kicker: 'Kimler hatırlıyor?', title: 'Teneffüs zili çaldı', sub: 'O 10 dakika bütün günün en güzel anıydı.', series: 'Kimler hatırlıyor?', count: '1/6', vhs: true };
+const esc = (s = '') => String(s).replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
+const kind = c.kind || 'cover';
+const card = document.createElement('div');
+card.className = ['card', c.format === 'story' ? 'story' : '', 't-' + (c.bg || 'plum'), 'k-' + kind, c.vhs ? 'vhs' : '', c.image ? 'has-img' : ''].join(' ');
+let body = '';
+if (kind === 'cover') {
+  body = `${c.kicker ? `<p class="kicker">${esc(c.kicker)}</p>` : ''}<h1 class="hook">${esc(c.title)}</h1>${c.sub ? `<p class="sub">${esc(c.sub)}</p>` : ''}`;
+} else if (kind === 'text') {
+  body = `${c.kicker ? `<p class="kicker">${esc(c.kicker)}</p>` : ''}<p class="line">${esc(c.title)}</p>${c.sub ? `<p class="sub">${esc(c.sub)}</p>` : ''}`;
+} else if (kind === 'list') {
+  body = `${c.kicker ? `<p class="kicker">${esc(c.kicker)}</p>` : ''}<h2>${esc(c.title)}</h2><ol>${(c.items || []).map((x, k) => `<li><b>${k + 1}</b><span>${esc(x)}</span></li>`).join('')}</ol>`;
+} else if (kind === 'tazo') {
+  body = `${c.kicker ? `<p class="kicker">${esc(c.kicker)}</p>` : ''}<div class="tazo"><span class="no">#${String(c.number || 1).padStart(2, '0')}</span><span class="nm">${esc(c.title)}</span>${c.sub ? `<span class="tx">${esc(c.sub)}</span>` : ''}</div>`;
+} else if (kind === 'chart') {
+  const p = c.points || [], W = 912, H = c.format === 'story' ? 900 : 640, pad = 70;
+  const x = (k) => pad + (k * (W - 2 * pad)) / Math.max(1, p.length - 1), y = (v) => H - 110 - (v / 100) * (H - 200);
+  const path = p.map((q, k) => `${k ? 'L' : 'M'}${x(k)} ${y(q.value)}`).join(' ');
+  body = `${c.kicker ? `<p class="kicker">${esc(c.kicker)}</p>` : ''}<h2>${esc(c.title)}</h2>
+  <svg viewBox="0 0 ${W} ${H}"><line x1="${pad}" y1="${H - 110}" x2="${W - pad}" y2="${H - 110}" stroke="currentColor" stroke-width="4" opacity=".5"/>
+  <path d="${path}" fill="none" stroke="var(--acc)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  ${p.map((q, k) => `<circle cx="${x(k)}" cy="${y(q.value)}" r="16" fill="var(--acc)"/><text x="${x(k)}" y="${H - 50}" text-anchor="middle" font-family="Fira" font-weight="700" font-size="34" fill="currentColor">${esc(q.label)}</text>${q.note ? `<text x="${x(k)}" y="${y(q.value) - 34}" text-anchor="middle" font-family="Fira" font-weight="500" font-size="30" fill="currentColor">${esc(q.note)}</text>` : ''}`).join('')}</svg>`;
+}
+card.innerHTML = `${c.image ? `<div class="bgimg" style="background-image:url('${esc(c.image)}')"></div>` : ''}
+${c.series ? `<div class="badge">${esc(c.series)}</div>` : ''}
+<div class="wrap">${body}</div>
+<div class="bar"><span class="wm"><span class="dot"></span>Doksanland</span><span class="right">${[c.credit ? 'Kaynak: ' + esc(c.credit) : '', esc(c.count || '')].filter(Boolean).join('  ·  ')}</span></div>`;
+document.getElementById('root').appendChild(card);
+// shrink headlines until every word fits on its line (never break a word in two)
+document.fonts.ready.then(() => {
+  for (const el of card.querySelectorAll('.hook, .k-list h2, .k-chart h2, .tazo .nm, .k-text .line')) {
+    el.classList.add('fit');
+    let size = parseFloat(getComputedStyle(el).fontSize);
+    const words = () => { const r = document.createRange(); r.selectNodeContents(el); return r.getBoundingClientRect().width; };
+    while (size > 40 && (el.scrollWidth > el.clientWidth + 1 || words() > el.clientWidth + 1)) { size -= 4; el.style.fontSize = size + 'px'; }
+  }
+  document.body.dataset.ready = '1';
+});
+</script>
+</body>
+</html>

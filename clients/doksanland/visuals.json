@@ -1,0 +1,80 @@
+[
+  {
+    "id": "d01a-1",
+    "format": "post",
+    "kind": "cover",
+    "bg": "plum",
+    "vhs": true,
+    "kicker": "Hoş geldin",
+    "title": "Doksanland'a giriş serbest",
+    "sub": "Küçük mutlulukların tema parkı. Bilet yok.",
+    "count": "1/3"
+  },
+  {
+    "id": "d01a-2",
+    "format": "post",
+    "kind": "list",
+    "bg": "cream",
+    "title": "Burada neler var?",
+    "items": [
+      "Kimler hatırlıyor?",
+      "Teneffüs",
+      "Doksanland Bülteni",
+      "Doksanland Tazoları",
+      "Paketten ne çıktı?"
+    ],
+    "count": "2/3"
+  },
+  {
+    "id": "d01a-3",
+    "format": "post",
+    "kind": "text",
+    "bg": "yellow",
+    "kicker": "İlk soru senden",
+    "title": "Çocukluğunun en sevdiğin küçük mutluluğu neydi?",
+    "sub": "Cevabını yorumlara bırak, en güzelleri bir sonraki postta.",
+    "count": "3/3"
+  },
+  {
+    "id": "d01b-1",
+    "format": "post",
+    "kind": "chart",
+    "bg": "teal",
+    "series": "Teneffüs",
+    "kicker": "Bilimsel çalışma",
+    "title": "Teneffüs zili: dakika dakika enerji",
+    "points": [
+      {
+        "label": "Ders",
+        "value": 12
+      },
+      {
+        "label": "Zil!",
+        "value": 100
+      },
+      {
+        "label": "Kantin",
+        "value": 82
+      },
+      {
+        "label": "9. dk",
+        "value": 45
+      },
+      {
+        "label": "Zil",
+        "value": 4
+      }
+    ]
+  },
+  {
+    "id": "d01-tazo-test",
+    "format": "post",
+    "kind": "tazo",
+    "bg": "coral",
+    "vhs": true,
+    "kicker": "Doksanland Tazoları",
+    "number": 1,
+    "title": "Teneffüs zili",
+    "sub": "Nadirlik: efsane"
+  }
+]

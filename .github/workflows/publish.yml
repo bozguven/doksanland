@@ -1,0 +1,71 @@
+# Doksanland publisher: every 10 minutes, publishes APPROVED campaign items that are due
+# to Instagram and the Facebook Page through Meta's Graph API. Runs on GitHub, so the Mac can be off.
+#
+# Setup (once, in GitHub → this repo → Settings → Secrets and variables → Actions):
+#   Secret   META_PAGE_TOKEN   long-lived Page access token (Doksanland Page)
+#   Variable PUBLISH_ENABLED   "true" to really publish (anything else = dry run, nothing posted)
+#   Variable META_PAGE_ID / META_IG_USER_ID   optional, found from the token otherwise
+# Media: videos of approved items live on the branch "publish-media" (tools/publish/upload-media.sh), not on main.
+# Kill switch: set PUBLISH_ENABLED to "false", or disable this workflow in the Actions tab.
+name: publish
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+    inputs:
+      command:
+        description: 'plan | check | run'
+        default: 'plan'
+      item:
+        description: 'optional: publish this approved item now (run only)'
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
+      META_PAGE_ID: ${{ vars.META_PAGE_ID }}
+      META_IG_USER_ID: ${{ vars.META_IG_USER_ID }}
+      PUBLISH_ENABLED: ${{ vars.PUBLISH_ENABLED || secrets.PUBLISH_ENABLED }}
+      META_FACEBOOK: ${{ vars.META_FACEBOOK }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Get the media of approved items (branch publish-media)
+        run: |
+          mkdir -p out/doksanland
+          if git fetch -q --depth 1 origin publish-media; then
+            git archive FETCH_HEAD | tar -x -C out/doksanland
+          fi
+          ls -R out/doksanland | head -40
+      - name: Publish
+        run: |
+          CMD="${{ github.event.inputs.command || 'run' }}"
+          ITEM="${{ github.event.inputs.item }}"
+          node tools/publish/meta.mjs plan
+          if [ "$CMD" = "check" ]; then node tools/publish/meta.mjs check; fi
+          if [ "$CMD" = "run" ]; then
+            if [ -n "$ITEM" ]; then node tools/publish/meta.mjs run --now "$ITEM"; else node tools/publish/meta.mjs run; fi
+          fi
+      - name: Save what was published
+        if: always()
+        run: |
+          if ! git diff --quiet clients/; then
+            git config user.name "doksanland-publisher"
+            git config user.email "doksanland-publisher@users.noreply.github.com"
+            git add clients/
+            git commit -m "publisher: record published items [skip ci]"
+            for n in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 5; done
+          fi
