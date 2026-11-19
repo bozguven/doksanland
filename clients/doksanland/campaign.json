@@ -2,11 +2,11 @@
   "client": "doksanland",
   "timezone": "Europe/Istanbul",
   "updated": "2026-11-19",
-  "note": "Day 1 = 2026-11-23 is a placeholder start date: shift all dates once Bertuğ picks the launch day. 'planned' items are empty slots; nothing publishes unless status is 'approved'.",
+  "note": "Launch day: Saturday 2026-11-21 (Day 1). 'planned' items are empty slots; nothing publishes unless status is 'approved'.",
   "items": [
     {
       "id": "D01A",
-      "date": "2026-11-23",
+      "date": "2026-11-21",
       "time": "09:30",
       "desk": "editor",
       "channel": "instagram",
@@ -28,7 +28,7 @@
     },
     {
       "id": "D01B",
-      "date": "2026-11-23",
+      "date": "2026-11-21",
       "time": "13:00",
       "desk": "teneffus",
       "channel": "instagram",
@@ -48,13 +48,13 @@
     },
     {
       "id": "D01C",
-      "date": "2026-11-23",
+      "date": "2026-11-21",
       "time": "20:30",
       "desk": "nostalji",
       "channel": "instagram",
       "format": "reel",
       "mode": "auto",
-      "title": "Paketten ne çıktı? #1 (AI pack-opening Reel)",
+      "title": "Paketten ne çıktı? (AI pack-opening Reel)",
       "caption_tr": "cips paketini açarken kalbin hızlanırdı, değil mi?\nbugün paketten ne çıktı, sonuna kadar izle.\nsenin en değerli tazon hangisiydi? 👇",
       "visuals": [
         "video:reel-d01c"
@@ -67,77 +67,248 @@
       "status": "draft",
       "approval": {
         "bertug": null
-      }
+      },
+      "beats": [
+        [
+          "0.0-2.0",
+          "Paketi açarken kalbin hızlanırdı",
+          "plum"
+        ],
+        [
+          "2.0-4.0",
+          "Çıtır çıtır… ama önce o",
+          "coral"
+        ],
+        [
+          "4.0-6.5",
+          "Paketin dibinde bir şey parlıyor",
+          "yellow"
+        ],
+        [
+          "6.5-9.0",
+          "TAZO! (spinning round disc, #01)",
+          "teal"
+        ],
+        [
+          "9.0-11.0",
+          "Senin en değerli tazon hangisiydi?",
+          "cream"
+        ]
+      ]
     },
     {
       "id": "D02A",
-      "date": "2026-11-24",
+      "date": "2026-11-22",
       "time": "09:30",
-      "desk": "gundem",
+      "desk": "yasam",
       "channel": "instagram",
       "format": "reel",
       "mode": "auto",
-      "title": "Doksanland Bülteni: today's trend",
-      "caption_tr": "",
-      "visuals": [],
+      "title": "Yazlığa yolculuk (summer-house drive Reel)",
+      "caption_tr": "sabahın beşinde yola çıkılır, bagaj zor kapanır, arkadan biri \"daha çok var mı?\" diye sorardı.\nsonra bir viraj döner, deniz görünürdü.\ndenizi ilk gören sen miydin? 👇",
+      "visuals": [
+        "video:reel-d02a"
+      ],
       "credit": null,
       "needs": [
-        "desk candidates"
+        "video desk: motion typography + original chiptune (6 beats, payoff 'Ve deniz göründü' at ~7.4 s)"
       ],
-      "status": "planned",
+      "status": "draft",
       "approval": {
         "bertug": null
-      }
+      },
+      "beats": [
+        [
+          "0.0-2.0",
+          "Sabah beşte yola çıkılırdı",
+          "plum",
+          "small car slides in, stars fade"
+        ],
+        [
+          "2.0-3.8",
+          "Bagaj tıka basa dolu",
+          "coral",
+          "bags drop, boot lid wobbles"
+        ],
+        [
+          "3.8-5.6",
+          "Daha çok var mı?",
+          "cream",
+          "three dots pulse, text repeats bigger"
+        ],
+        [
+          "5.6-7.4",
+          "Denizi ilk gören kazanır",
+          "yellow",
+          "dashed arcs race right"
+        ],
+        [
+          "7.4-9.6",
+          "Ve deniz göründü",
+          "teal",
+          "waves rise, sun pops, music opens up"
+        ],
+        [
+          "9.6-12.0",
+          "Yaz yine gelecek",
+          "cream",
+          "car + sun bob, DOKSANLAND wordmark"
+        ]
+      ]
     },
     {
       "id": "D02B",
-      "date": "2026-11-24",
+      "date": "2026-11-22",
       "time": "13:00",
       "desk": "nostalji",
       "channel": "instagram",
-      "format": "carousel",
+      "format": "post",
       "mode": "auto",
-      "title": "Kimler hatırlıyor?",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
+      "title": "Doksanland Tazoları #1: Cipsten çıkan tazo",
+      "caption_tr": "Doksanland Tazoları #1: cips paketinin dibinden çıkan o tazo.\npaketi açınca önce cipse değil, tazoya bakılırdı. hangisi çıktı, sende var mıydı, takas eder miyiz…\nyeni tazolar yolda. kaydet, seti tamamla.",
+      "visuals": [
+        "d02b-1"
       ],
-      "status": "planned",
+      "credit": null,
+      "needs": [],
+      "status": "draft",
       "approval": {
         "bertug": null
       }
     },
     {
       "id": "D02C",
-      "date": "2026-11-24",
+      "date": "2026-11-22",
       "time": "20:30",
       "desk": "repost",
       "channel": "instagram",
+      "format": "post",
+      "mode": "auto",
+      "title": "Repost: @birboredkiz — Ne ara 30 olduk sahi?",
+      "caption_tr": "ne ara 30 olduk sahi?\naynada hâlâ teneffüse çıkacak gibi duruyoruz, nüfus cüzdanı başka bir şey söylüyor.\no 90 doğumlu arkadaşına gönder.",
+      "visuals": [
+        "d02c-1"
+      ],
+      "credit": "@birboredkiz",
+      "needs": [
+        "Bertuğ: open the link — tweet still live, account public, no 'no reposts' in bio"
+      ],
+      "status": "draft",
+      "approval": {
+        "bertug": null
+      },
+      "source": "https://x.com/birboredkiz/status/2120562117426204925"
+    },
+    {
+      "id": "D03A",
+      "date": "2026-11-23",
+      "time": "09:30",
+      "desk": "gundem",
+      "channel": "instagram",
       "format": "reel",
       "mode": "auto",
-      "title": "Curated viral post, credited",
-      "caption_tr": "",
-      "visuals": [],
+      "title": "Doksanland Bülteni: Aynı köşe, yıllar sonra",
+      "caption_tr": "aynı köşe, yıllar sonra. internet bu ara eski fotoğraflarının çekildiği yere geri dönüyor.\nbiz de muhabirimizi mahalleye yolladık: top hâlâ aynı duvara çarpıyor.\nsen hangi köşeye geri dönerdin?",
+      "visuals": [
+        "video:reel-d03a"
+      ],
       "credit": null,
       "needs": [
-        "desk candidates"
+        "video desk: 90s TV bulletin motion typography (HABER BÜLTENİ lower-third, clock, ticker) + original synth"
       ],
-      "status": "planned",
+      "status": "draft",
+      "approval": {
+        "bertug": null
+      },
+      "sources": [
+        "https://www.socialpilot.co/blog/tiktok-trends (opened 19 Nov 2026: 'Same Spot, Years Apart')"
+      ],
+      "alternative": "GTA VI launch (19 Nov) bulletin — stronger trend but price-anger / 18+ / ban-speculation risk in Türkiye; Bertuğ's call",
+      "beats": [
+        [
+          "0.0-2.8",
+          "Haber bülteninden kısa kısa: aynı köşe, yıllar sonra"
+        ],
+        [
+          "2.8-5.0",
+          "İnternet bu hafta eski fotoğraflarının yerine dönüyor"
+        ],
+        [
+          "5.0-7.4",
+          "BAKKAL KÖŞESİ: 1996 | BUGÜN (split screen)"
+        ],
+        [
+          "7.4-9.8",
+          "Top hâlâ o duvara çarpıyor"
+        ],
+        [
+          "9.8-12.0",
+          "Değişen tek şey: artık eve erken dönmek zorunda değiliz"
+        ],
+        [
+          "12.0-13.0",
+          "Sen hangi köşeye geri dönerdin?"
+        ]
+      ],
+      "ticker": "MUHABİRİMİZ MAHALLEDE · TOP DUVARA DEĞDİ · ANNE BİR SAAT DAHA"
+    },
+    {
+      "id": "D03B",
+      "date": "2026-11-23",
+      "time": "13:00",
+      "desk": "nostalji",
+      "channel": "instagram",
+      "format": "carousel",
+      "mode": "auto",
+      "title": "Kimler hatırlıyor?: Beslenme çantasında ne vardı?",
+      "caption_tr": "beslenme çantasının fermuarını açtığın an gelen o folyo kokusu.\nezilmiş sandviç, sızdıran matara, sıraya vurularak kırılan yumurta… bir de teneffüsteki büyük takas.\nsenin çantandan en çok ne çıkardı? 👇",
+      "visuals": [
+        "d03b-1",
+        "d03b-2",
+        "d03b-3",
+        "d03b-4",
+        "d03b-5",
+        "d03b-6"
+      ],
+      "credit": null,
+      "needs": [],
+      "status": "draft",
       "approval": {
         "bertug": null
       }
     },
     {
-      "id": "D03A",
-      "date": "2026-11-25",
+      "id": "D03C",
+      "date": "2026-11-23",
+      "time": "20:30",
+      "desk": "repost",
+      "channel": "instagram",
+      "format": "post",
+      "mode": "auto",
+      "title": "Repost: @nidadincturk — Türk annesi Londra'da",
+      "caption_tr": "annen nerede olursa olsun, bir gün sana atlet alır.\nlondra, paris, berlin fark etmez. üşümeyeceksin, o kadar.\nyurt dışındaki o arkadaşına gönder.",
+      "visuals": [
+        "d03c-1"
+      ],
+      "credit": "@nidadincturk",
+      "needs": [
+        "Bertuğ: open the link — tweet still live, account public, no 'no reposts' in bio (we use the text only, not her photo)"
+      ],
+      "status": "draft",
+      "approval": {
+        "bertug": null
+      },
+      "source": "https://x.com/nidadincturk/status/1203409115252502529"
+    },
+    {
+      "id": "D04A",
+      "date": "2026-11-24",
       "time": "09:30",
       "desk": "nostalji",
       "channel": "instagram",
       "format": "post",
       "mode": "auto",
-      "title": "Doksanland Tazoları #1",
+      "title": "Doksanland Tazoları",
       "caption_tr": "",
       "visuals": [],
       "credit": null,
@@ -150,8 +321,8 @@
       }
     },
     {
-      "id": "D03B",
-      "date": "2026-11-25",
+      "id": "D04B",
+      "date": "2026-11-24",
       "time": "13:00",
       "desk": "teneffus",
       "channel": "instagram",
@@ -170,8 +341,8 @@
       }
     },
     {
-      "id": "D03C",
-      "date": "2026-11-25",
+      "id": "D04C",
+      "date": "2026-11-24",
       "time": "20:30",
       "desk": "nostalji",
       "channel": "instagram",
@@ -190,7 +361,67 @@
       }
     },
     {
-      "id": "D04A",
+      "id": "D05A",
+      "date": "2026-11-25",
+      "time": "09:30",
+      "desk": "gundem",
+      "channel": "instagram",
+      "format": "reel",
+      "mode": "auto",
+      "title": "Doksanland Bülteni",
+      "caption_tr": "",
+      "visuals": [],
+      "credit": null,
+      "needs": [
+        "desk candidates"
+      ],
+      "status": "planned",
+      "approval": {
+        "bertug": null
+      }
+    },
+    {
+      "id": "D05B",
+      "date": "2026-11-25",
+      "time": "13:00",
+      "desk": "ekran",
+      "channel": "instagram",
+      "format": "carousel",
+      "mode": "auto",
+      "title": "Pop culture: 2000s screen moment",
+      "caption_tr": "",
+      "visuals": [],
+      "credit": null,
+      "needs": [
+        "desk candidates"
+      ],
+      "status": "planned",
+      "approval": {
+        "bertug": null
+      }
+    },
+    {
+      "id": "D05C",
+      "date": "2026-11-25",
+      "time": "20:30",
+      "desk": "repost",
+      "channel": "instagram",
+      "format": "reel",
+      "mode": "auto",
+      "title": "Curated viral post, credited",
+      "caption_tr": "",
+      "visuals": [],
+      "credit": null,
+      "needs": [
+        "desk candidates"
+      ],
+      "status": "planned",
+      "approval": {
+        "bertug": null
+      }
+    },
+    {
+      "id": "D06A",
       "date": "2026-11-26",
       "time": "09:30",
       "desk": "gundem",
@@ -210,49 +441,9 @@
       }
     },
     {
-      "id": "D04B",
+      "id": "D06B",
       "date": "2026-11-26",
       "time": "13:00",
-      "desk": "ekran",
-      "channel": "instagram",
-      "format": "carousel",
-      "mode": "auto",
-      "title": "Pop culture: 2000s screen moment",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
-      ],
-      "status": "planned",
-      "approval": {
-        "bertug": null
-      }
-    },
-    {
-      "id": "D04C",
-      "date": "2026-11-26",
-      "time": "20:30",
-      "desk": "repost",
-      "channel": "instagram",
-      "format": "reel",
-      "mode": "auto",
-      "title": "Curated viral post, credited",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
-      ],
-      "status": "planned",
-      "approval": {
-        "bertug": null
-      }
-    },
-    {
-      "id": "D05A",
-      "date": "2026-11-27",
-      "time": "09:30",
       "desk": "nostalji",
       "channel": "instagram",
       "format": "carousel",
@@ -270,88 +461,8 @@
       }
     },
     {
-      "id": "D05B",
-      "date": "2026-11-27",
-      "time": "13:00",
-      "desk": "teneffus",
-      "channel": "instagram",
-      "format": "post",
-      "mode": "auto",
-      "title": "Teneffüs",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
-      ],
-      "status": "planned",
-      "approval": {
-        "bertug": null
-      }
-    },
-    {
-      "id": "D05C",
-      "date": "2026-11-27",
-      "time": "20:30",
-      "desk": "video",
-      "channel": "instagram",
-      "format": "reel",
-      "mode": "auto",
-      "title": "Cuma Jeneriği #1",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
-      ],
-      "status": "planned",
-      "approval": {
-        "bertug": null
-      }
-    },
-    {
-      "id": "D06A",
-      "date": "2026-11-28",
-      "time": "09:30",
-      "desk": "yasam",
-      "channel": "instagram",
-      "format": "reel",
-      "mode": "auto",
-      "title": "Weekend: summer-holiday memory",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
-      ],
-      "status": "planned",
-      "approval": {
-        "bertug": null
-      }
-    },
-    {
-      "id": "D06B",
-      "date": "2026-11-28",
-      "time": "13:00",
-      "desk": "nostalji",
-      "channel": "instagram",
-      "format": "post",
-      "mode": "auto",
-      "title": "Doksanland Tazoları #2",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
-      ],
-      "status": "planned",
-      "approval": {
-        "bertug": null
-      }
-    },
-    {
       "id": "D06C",
-      "date": "2026-11-28",
+      "date": "2026-11-26",
       "time": "20:30",
       "desk": "repost",
       "channel": "instagram",
@@ -371,13 +482,13 @@
     },
     {
       "id": "D07A",
-      "date": "2026-11-29",
+      "date": "2026-11-27",
       "time": "09:30",
-      "desk": "editor",
+      "desk": "nostalji",
       "channel": "instagram",
       "format": "carousel",
       "mode": "auto",
-      "title": "Week-1 favourites recap",
+      "title": "Kimler hatırlıyor?",
       "caption_tr": "",
       "visuals": [],
       "credit": null,
@@ -391,7 +502,7 @@
     },
     {
       "id": "D07B",
-      "date": "2026-11-29",
+      "date": "2026-11-27",
       "time": "13:00",
       "desk": "teneffus",
       "channel": "instagram",
@@ -411,7 +522,67 @@
     },
     {
       "id": "D07C",
-      "date": "2026-11-29",
+      "date": "2026-11-27",
+      "time": "20:30",
+      "desk": "video",
+      "channel": "instagram",
+      "format": "reel",
+      "mode": "auto",
+      "title": "Cuma Jeneriği",
+      "caption_tr": "",
+      "visuals": [],
+      "credit": null,
+      "needs": [
+        "desk candidates"
+      ],
+      "status": "planned",
+      "approval": {
+        "bertug": null
+      }
+    },
+    {
+      "id": "D08A",
+      "date": "2026-11-28",
+      "time": "09:30",
+      "desk": "editor",
+      "channel": "instagram",
+      "format": "carousel",
+      "mode": "auto",
+      "title": "Week-1 favourites recap",
+      "caption_tr": "",
+      "visuals": [],
+      "credit": null,
+      "needs": [
+        "desk candidates"
+      ],
+      "status": "planned",
+      "approval": {
+        "bertug": null
+      }
+    },
+    {
+      "id": "D08B",
+      "date": "2026-11-28",
+      "time": "13:00",
+      "desk": "teneffus",
+      "channel": "instagram",
+      "format": "post",
+      "mode": "auto",
+      "title": "Teneffüs",
+      "caption_tr": "",
+      "visuals": [],
+      "credit": null,
+      "needs": [
+        "desk candidates"
+      ],
+      "status": "planned",
+      "approval": {
+        "bertug": null
+      }
+    },
+    {
+      "id": "D08C",
+      "date": "2026-11-28",
       "time": "20:30",
       "desk": "nostalji",
       "channel": "instagram",
@@ -430,74 +601,14 @@
       }
     },
     {
-      "id": "D08A",
-      "date": "2026-11-30",
-      "time": "09:30",
-      "desk": "gundem",
-      "channel": "instagram",
-      "format": "reel",
-      "mode": "auto",
-      "title": "Doksanland Bülteni",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
-      ],
-      "status": "planned",
-      "approval": {
-        "bertug": null
-      }
-    },
-    {
-      "id": "D08B",
-      "date": "2026-11-30",
-      "time": "13:00",
-      "desk": "nostalji",
-      "channel": "instagram",
-      "format": "carousel",
-      "mode": "auto",
-      "title": "Kimler hatırlıyor?",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
-      ],
-      "status": "planned",
-      "approval": {
-        "bertug": null
-      }
-    },
-    {
-      "id": "D08C",
-      "date": "2026-11-30",
-      "time": "20:30",
-      "desk": "repost",
-      "channel": "instagram",
-      "format": "reel",
-      "mode": "auto",
-      "title": "Curated viral post, credited",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
-      ],
-      "status": "planned",
-      "approval": {
-        "bertug": null
-      }
-    },
-    {
       "id": "D09A",
-      "date": "2026-12-01",
+      "date": "2026-11-29",
       "time": "09:30",
-      "desk": "nostalji",
+      "desk": "yasam",
       "channel": "instagram",
-      "format": "post",
+      "format": "reel",
       "mode": "auto",
-      "title": "Doksanland Tazoları #3",
+      "title": "Weekend: school-days memory",
       "caption_tr": "",
       "visuals": [],
       "credit": null,
@@ -511,7 +622,7 @@
     },
     {
       "id": "D09B",
-      "date": "2026-12-01",
+      "date": "2026-11-29",
       "time": "13:00",
       "desk": "ekran",
       "channel": "instagram",
@@ -531,67 +642,7 @@
     },
     {
       "id": "D09C",
-      "date": "2026-12-01",
-      "time": "20:30",
-      "desk": "nostalji",
-      "channel": "instagram",
-      "format": "reel",
-      "mode": "auto",
-      "title": "Nostalgia memory video",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
-      ],
-      "status": "planned",
-      "approval": {
-        "bertug": null
-      }
-    },
-    {
-      "id": "D10A",
-      "date": "2026-12-02",
-      "time": "09:30",
-      "desk": "gundem",
-      "channel": "instagram",
-      "format": "reel",
-      "mode": "auto",
-      "title": "Doksanland Bülteni",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
-      ],
-      "status": "planned",
-      "approval": {
-        "bertug": null
-      }
-    },
-    {
-      "id": "D10B",
-      "date": "2026-12-02",
-      "time": "13:00",
-      "desk": "teneffus",
-      "channel": "instagram",
-      "format": "carousel",
-      "mode": "auto",
-      "title": "Teneffüs: chart joke",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
-      ],
-      "status": "planned",
-      "approval": {
-        "bertug": null
-      }
-    },
-    {
-      "id": "D10C",
-      "date": "2026-12-02",
+      "date": "2026-11-29",
       "time": "20:30",
       "desk": "repost",
       "channel": "instagram",
@@ -610,94 +661,14 @@
       }
     },
     {
-      "id": "D11A",
-      "date": "2026-12-03",
+      "id": "D10A",
+      "date": "2026-11-30",
       "time": "09:30",
-      "desk": "nostalji",
-      "channel": "instagram",
-      "format": "carousel",
-      "mode": "auto",
-      "title": "Kimler hatırlıyor?",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
-      ],
-      "status": "planned",
-      "approval": {
-        "bertug": null
-      }
-    },
-    {
-      "id": "D11B",
-      "date": "2026-12-03",
-      "time": "13:00",
-      "desk": "teneffus",
-      "channel": "instagram",
-      "format": "post",
-      "mode": "auto",
-      "title": "Teneffüs",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
-      ],
-      "status": "planned",
-      "approval": {
-        "bertug": null
-      }
-    },
-    {
-      "id": "D11C",
-      "date": "2026-12-03",
-      "time": "20:30",
-      "desk": "nostalji",
-      "channel": "instagram",
-      "format": "reel",
-      "mode": "auto",
-      "title": "Paketten ne çıktı?",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
-      ],
-      "status": "planned",
-      "approval": {
-        "bertug": null
-      }
-    },
-    {
-      "id": "D12A",
-      "date": "2026-12-04",
-      "time": "09:30",
-      "desk": "gundem",
-      "channel": "instagram",
-      "format": "reel",
-      "mode": "auto",
-      "title": "Doksanland Bülteni",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
-      ],
-      "status": "planned",
-      "approval": {
-        "bertug": null
-      }
-    },
-    {
-      "id": "D12B",
-      "date": "2026-12-04",
-      "time": "13:00",
       "desk": "nostalji",
       "channel": "instagram",
       "format": "post",
       "mode": "auto",
-      "title": "Doksanland Tazoları #4",
+      "title": "Doksanland Tazoları",
       "caption_tr": "",
       "visuals": [],
       "credit": null,
@@ -710,48 +681,8 @@
       }
     },
     {
-      "id": "D12C",
-      "date": "2026-12-04",
-      "time": "20:30",
-      "desk": "video",
-      "channel": "instagram",
-      "format": "reel",
-      "mode": "auto",
-      "title": "Cuma Jeneriği #2",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
-      ],
-      "status": "planned",
-      "approval": {
-        "bertug": null
-      }
-    },
-    {
-      "id": "D13A",
-      "date": "2026-12-05",
-      "time": "09:30",
-      "desk": "yasam",
-      "channel": "instagram",
-      "format": "reel",
-      "mode": "auto",
-      "title": "Weekend: school-days memory",
-      "caption_tr": "",
-      "visuals": [],
-      "credit": null,
-      "needs": [
-        "desk candidates"
-      ],
-      "status": "planned",
-      "approval": {
-        "bertug": null
-      }
-    },
-    {
-      "id": "D13B",
-      "date": "2026-12-05",
+      "id": "D10B",
+      "date": "2026-11-30",
       "time": "13:00",
       "desk": "ekran",
       "channel": "instagram",
@@ -770,8 +701,68 @@
       }
     },
     {
-      "id": "D13C",
-      "date": "2026-12-05",
+      "id": "D10C",
+      "date": "2026-11-30",
+      "time": "20:30",
+      "desk": "nostalji",
+      "channel": "instagram",
+      "format": "reel",
+      "mode": "auto",
+      "title": "Nostalgia memory video",
+      "caption_tr": "",
+      "visuals": [],
+      "credit": null,
+      "needs": [
+        "desk candidates"
+      ],
+      "status": "planned",
+      "approval": {
+        "bertug": null
+      }
+    },
+    {
+      "id": "D11A",
+      "date": "2026-12-01",
+      "time": "09:30",
+      "desk": "gundem",
+      "channel": "instagram",
+      "format": "reel",
+      "mode": "auto",
+      "title": "Doksanland Bülteni",
+      "caption_tr": "",
+      "visuals": [],
+      "credit": null,
+      "needs": [
+        "desk candidates"
+      ],
+      "status": "planned",
+      "approval": {
+        "bertug": null
+      }
+    },
+    {
+      "id": "D11B",
+      "date": "2026-12-01",
+      "time": "13:00",
+      "desk": "teneffus",
+      "channel": "instagram",
+      "format": "carousel",
+      "mode": "auto",
+      "title": "Teneffüs: chart joke",
+      "caption_tr": "",
+      "visuals": [],
+      "credit": null,
+      "needs": [
+        "desk candidates"
+      ],
+      "status": "planned",
+      "approval": {
+        "bertug": null
+      }
+    },
+    {
+      "id": "D11C",
+      "date": "2026-12-01",
       "time": "20:30",
       "desk": "repost",
       "channel": "instagram",
@@ -790,14 +781,14 @@
       }
     },
     {
-      "id": "D14A",
-      "date": "2026-12-06",
+      "id": "D12A",
+      "date": "2026-12-02",
       "time": "09:30",
-      "desk": "editor",
+      "desk": "nostalji",
       "channel": "instagram",
       "format": "carousel",
       "mode": "auto",
-      "title": "Two-week favourites recap",
+      "title": "Kimler hatırlıyor?",
       "caption_tr": "",
       "visuals": [],
       "credit": null,
@@ -810,8 +801,8 @@
       }
     },
     {
-      "id": "D14B",
-      "date": "2026-12-06",
+      "id": "D12B",
+      "date": "2026-12-02",
       "time": "13:00",
       "desk": "teneffus",
       "channel": "instagram",
@@ -830,14 +821,134 @@
       }
     },
     {
-      "id": "D14C",
-      "date": "2026-12-06",
+      "id": "D12C",
+      "date": "2026-12-02",
+      "time": "20:30",
+      "desk": "nostalji",
+      "channel": "instagram",
+      "format": "reel",
+      "mode": "auto",
+      "title": "Paketten ne çıktı?",
+      "caption_tr": "",
+      "visuals": [],
+      "credit": null,
+      "needs": [
+        "desk candidates"
+      ],
+      "status": "planned",
+      "approval": {
+        "bertug": null
+      }
+    },
+    {
+      "id": "D13A",
+      "date": "2026-12-03",
+      "time": "09:30",
+      "desk": "editor",
+      "channel": "instagram",
+      "format": "carousel",
+      "mode": "auto",
+      "title": "Two-week favourites recap",
+      "caption_tr": "",
+      "visuals": [],
+      "credit": null,
+      "needs": [
+        "desk candidates"
+      ],
+      "status": "planned",
+      "approval": {
+        "bertug": null
+      }
+    },
+    {
+      "id": "D13B",
+      "date": "2026-12-03",
+      "time": "13:00",
+      "desk": "teneffus",
+      "channel": "instagram",
+      "format": "post",
+      "mode": "auto",
+      "title": "Teneffüs",
+      "caption_tr": "",
+      "visuals": [],
+      "credit": null,
+      "needs": [
+        "desk candidates"
+      ],
+      "status": "planned",
+      "approval": {
+        "bertug": null
+      }
+    },
+    {
+      "id": "D13C",
+      "date": "2026-12-03",
       "time": "20:30",
       "desk": "nostalji",
       "channel": "instagram",
       "format": "reel",
       "mode": "auto",
       "title": "Nostalgia memory video",
+      "caption_tr": "",
+      "visuals": [],
+      "credit": null,
+      "needs": [
+        "desk candidates"
+      ],
+      "status": "planned",
+      "approval": {
+        "bertug": null
+      }
+    },
+    {
+      "id": "D14A",
+      "date": "2026-12-04",
+      "time": "09:30",
+      "desk": "gundem",
+      "channel": "instagram",
+      "format": "reel",
+      "mode": "auto",
+      "title": "Doksanland Bülteni",
+      "caption_tr": "",
+      "visuals": [],
+      "credit": null,
+      "needs": [
+        "desk candidates"
+      ],
+      "status": "planned",
+      "approval": {
+        "bertug": null
+      }
+    },
+    {
+      "id": "D14B",
+      "date": "2026-12-04",
+      "time": "13:00",
+      "desk": "nostalji",
+      "channel": "instagram",
+      "format": "post",
+      "mode": "auto",
+      "title": "Doksanland Tazoları",
+      "caption_tr": "",
+      "visuals": [],
+      "credit": null,
+      "needs": [
+        "desk candidates"
+      ],
+      "status": "planned",
+      "approval": {
+        "bertug": null
+      }
+    },
+    {
+      "id": "D14C",
+      "date": "2026-12-04",
+      "time": "20:30",
+      "desk": "video",
+      "channel": "instagram",
+      "format": "reel",
+      "mode": "auto",
+      "title": "Cuma Jeneriği",
       "caption_tr": "",
       "visuals": [],
       "credit": null,

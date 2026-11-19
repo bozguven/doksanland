@@ -67,14 +67,101 @@
     ]
   },
   {
-    "id": "d01-tazo-test",
+    "id": "d02b-1",
     "format": "post",
     "kind": "tazo",
-    "bg": "coral",
+    "bg": "plum",
     "vhs": true,
     "kicker": "Doksanland Tazoları",
     "number": 1,
-    "title": "Teneffüs zili",
-    "sub": "Nadirlik: efsane"
+    "title": "Cipsten çıkan tazo",
+    "sub": "Nadirlik: paketi ilk açan bilir"
+  },
+  {
+    "id": "d02c-1",
+    "format": "post",
+    "kind": "quote",
+    "bg": "cream",
+    "kicker": "90 doğumluların sorusu",
+    "quote": "90'larda doğanlar olarak hiçbirimiz yaşımızı göstermiyoruz. Bizden önceki nesil bu yaşlardayken gayet olgun duruyordu ama biz hala 20 lerin başında gibi duruyoruz. Bizden sonraki nesil de büyük duruyor ama biz nedense küçük duruyoruz. Anlam veremiyorum buna. Ne ara 30 olduk sahi?",
+    "handle": "@birboredkiz",
+    "credit": "@birboredkiz"
+  },
+  {
+    "id": "d03b-1",
+    "format": "post",
+    "kind": "cover",
+    "bg": "plum",
+    "vhs": true,
+    "series": "Kimler hatırlıyor?",
+    "kicker": "Okul yılları",
+    "title": "Beslenme çantasında ne vardı?",
+    "sub": "Kaydır, hatırla.",
+    "count": "1/6"
+  },
+  {
+    "id": "d03b-2",
+    "format": "post",
+    "kind": "text",
+    "bg": "cream",
+    "vhs": true,
+    "kicker": "01",
+    "title": "Folyoya sarılı, teneffüse kadar ezilmiş sandviç",
+    "sub": "Ekmek yassılmış, kaşar erimiş. Yine de en güzeliydi.",
+    "count": "2/6"
+  },
+  {
+    "id": "d03b-3",
+    "format": "post",
+    "kind": "text",
+    "bg": "yellow",
+    "vhs": true,
+    "kicker": "02",
+    "title": "Kapağı hiç tam kapanmayan matara",
+    "sub": "Defterler bir ıslandı mı, o koku haftalarca gitmezdi.",
+    "count": "3/6"
+  },
+  {
+    "id": "d03b-4",
+    "format": "post",
+    "kind": "text",
+    "bg": "teal",
+    "vhs": true,
+    "kicker": "03",
+    "title": "Peçeteye sarılı haşlanmış yumurta",
+    "sub": "Kabuğunu sıraya vurarak kırmak ayrı bir ritüeldi.",
+    "count": "4/6"
+  },
+  {
+    "id": "d03b-5",
+    "format": "post",
+    "kind": "text",
+    "bg": "coral",
+    "vhs": true,
+    "kicker": "04",
+    "title": "Teneffüsteki büyük takas",
+    "sub": "Senin kekin, benim poğaçam. Pazarlık zil çalmadan biterdi.",
+    "count": "5/6"
+  },
+  {
+    "id": "d03b-6",
+    "format": "post",
+    "kind": "text",
+    "bg": "plum",
+    "vhs": true,
+    "kicker": "Sıra sende",
+    "title": "Senin çantandan en çok ne çıkardı?",
+    "sub": "Cevabını yorumlara bırak.",
+    "count": "6/6"
+  },
+  {
+    "id": "d03c-1",
+    "format": "post",
+    "kind": "quote",
+    "bg": "cream",
+    "kicker": "Türk annesi sınır tanımaz",
+    "quote": "Merhaba. Annem Londra'da ve bir Türk annesi olarak elbette ki bana atlet almaya çalışıyor. Tatlılığına tahammül edemeyip ifşa ettim.",
+    "handle": "@nidadincturk",
+    "credit": "@nidadincturk"
   }
 ]
