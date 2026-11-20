@@ -1,0 +1,39 @@
+# Doksanland newsroom stack.
+#   n8n     — the departments: each desk is a scheduled workflow you can watch run
+#   render  — turns a visual spec into a finished Doksanland PNG (house template)
+#
+# Start:  cd stack && docker compose up -d
+# n8n:    http://localhost:5678
+# render: http://localhost:4000/health   (n8n reaches it at http://render:4000)
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n
+    container_name: doksanland-n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - GENERIC_TIMEZONE=Europe/Istanbul
+      - TZ=Europe/Istanbul
+      - N8N_DIAGNOSTICS_ENABLED=false
+      - N8N_PERSONALIZATION_ENABLED=false
+      # Lets workflows call the render service and read the repo's briefs
+      - NODE_FUNCTION_ALLOW_EXTERNAL=*
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./shared:/data/shared          # images the desks produce
+      - ../clients/doksanland:/data/brief:ro   # brief, voice, sources, campaign
+    depends_on:
+      - render
+
+  render:
+    build: ./render-service
+    container_name: doksanland-render
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./shared:/data
+
+volumes:
+  n8n_data:

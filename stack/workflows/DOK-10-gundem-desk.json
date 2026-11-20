@@ -1,0 +1,408 @@
+{
+  "name": "DOK-10 Gündem desk",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 1
+            }
+          ]
+        }
+      },
+      "id": "a1000000-0000-4000-8000-000000000001",
+      "name": "Every hour",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -640,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://trends.google.com/trending/rss?geo=TR",
+        "options": {}
+      },
+      "id": "a1000000-0000-4000-8000-000000000002",
+      "name": "Google Trends TR",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.1,
+      "position": [
+        -420,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Doksanland Gündem desk — first gate.\n// A Türkiye trend list is mostly politics and football, so this is deliberately blunt.\n// It is only the CHEAP gate: it catches obvious words, but it cannot know that\n// \"Ömer Bolat\" is a minister or that \"Çaykur Rizespor\" is a club. The desk's own\n// judgement (next node) is the real gate, and it must refuse anything it cannot place.\n\nconst BLOCK = [\n  // politics and state\n  'cumhurbaşkan','başbakan','bakan','meclis','parti','akp','chp','mhp','iyi parti','dem parti','seçim','siyaset','belediye','vali','asker','savaş','operasyon','şehit','terör','mavi vatan','gazze','israil','ukrayna','rusya','suriye',\n  // religion\n  'imam','cami','namaz','oruç','ramazan','kurban','dua','ayet','hadis','diyanet','hac','umre',\n  // money\n  'dolar','euro','altın','enflasyon','zam','faiz','asgari ücret','kira','ekonomi','maaş','vergi','iflas','kriz','borsa','bitcoin','kredi','indirim','ucuz','pahalı','fiyat',\n  // harm and tragedy\n  'öldü','ölüm','vefat','cenaze','kaza','deprem','sel','yangın','cinayet','tecavüz','taciz','şiddet','gözaltı','tutukland','dava','mahkeme','savcı','hastane','kanser','intihar','hasta',\n  // sport (clubs, bodies and the vocabulary around them)\n  'fenerbahçe','galatasaray','beşiktaş','trabzonspor','başakşehir','rizespor','konyaspor','antalyaspor','alanyaspor','kasımpaşa','göztepe','samsunspor','gaziantep fk','eyüpspor','bodrum fk','sivasspor','kayserispor','hatayspor','adana demirspor','pendikspor','spor','futbol','basketbol','maç','transfer','hakem','penaltı','süper lig','puan durumu','şampiyonlar ligi','tff','derbi','teknik direktör',\n  // vice\n  'bahis','kumar','iddaa','porno','seks','alkol','rakı','bira','şarap','sigara'\n];\n\nconst seen = $getWorkflowStaticData('global');\nseen.titles = Array.isArray(seen.titles) ? seen.titles : [];\n\nconst norm = (s) => (s || '').toLocaleLowerCase('tr');\nconst survivors = [];\n\nfor (const item of $input.all()) {\n  const title = item.json.title || '';\n  const t = norm(title);\n  if (!title) continue;\n  if (BLOCK.some((w) => t.includes(w))) continue;   // obvious off-limits\n  if (seen.titles.includes(t)) continue;             // already covered\n  survivors.push(title);\n}\n\nif (seen.titles.length > 400) seen.titles = seen.titles.slice(-200);\nif (survivors.length === 0) return [];\n\n// Hand the desk a shortlist and let it choose, rather than forcing the first one.\nconst candidates = survivors.slice(0, 6);\nfor (const c of candidates) seen.titles.push(norm(c));\n\nreturn [{ json: { candidates, checkedAt: new Date().toISOString() } }];"
+      },
+      "id": "a1000000-0000-4000-8000-000000000003",
+      "name": "Gate and pick",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -200,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  model: 'claude-sonnet-4-5',\n  max_tokens: 1200,\n  system: $('Doksanland brief').first().json.system,\n  messages: [ { role: 'user', content: 'Bugünün trend başlıkları:\\n- ' + $('Gate and pick').first().json.candidates.join('\\n- ') + '\\n\\nBirini seç ve Doksanland için gönderi taslağı hazırla. Sadece JSON döndür.' } ]\n}) }}",
+        "options": {}
+      },
+      "id": "a1000000-0000-4000-8000-000000000005",
+      "name": "Draft the post",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// The desk's standing instructions. Keep in step with\n// clients/doksanland/brief.md and .claude/skills/voice-tr/SKILL.md.\n\nconst system = `Sen Doksanland'ın Gündem masasısın. Doksanland, Türkçe konuşan 18-40 yaş için\nküçük mutluluklar üreten bir viral kültür dergisidir: nostalji (90'lar/2000'ler), mizah,\npop kültür ve günün trendleri; hepsi sıcak bir dille.\n\nSES: ironik ama asla kırıcı değil, mahalleden abi/abla tonu. \"sen\" diye hitap et.\nKısa cümleler. İlk satır kancadır. Tek bir çağrı (kaydet / arkadaşına gönder / yorum sorusu).\nReklam dili yok. \"eskiden her şey daha iyiydi\" tonu yok.\n\nMUTLAK YASAKLAR — biri bile varsa uygun:false döndür:\n- Parti siyaseti, siyasetçiler, bakanlar, devlet görevlileri, askeri ve uluslararası meseleler\n- Din ve dini figürler\n- Müstehcenlik, alkol, kumar, sigara\n- Ekonomi, enflasyon, zam, maaş, fiyat karşılaştırmaları (\"eskiden şu kadardı\" dahil)\n- Trajedi: ölüm, kaza, afet, suç, hastalık\n- Spor kulüpleri, maçlar, sporcular, transferler\n- Özel kişilerle dalga geçmek\n\nKİMLİK KURALI (çok önemli): Konu bir KİŞİ adıysa, o kişinin kim olduğunu kesin olarak\nbiliyor olmalısın VE eğlence/kültür dünyasından olmalı (oyuncu, müzisyen, yönetmen, komedyen).\nKim olduğundan emin değilsen, ya da siyasetçi/bürokrat/sporcu/iş insanı ise: uygun:false.\nAsla tahmin etme. Aynı şekilde tanımadığın bir kurum, takım veya marka adı varsa: uygun:false.\n\nGERÇEKLER: uydurma yok. Doğrulayamadığın her iddiayı dogrulanacak listesine koy.\n\nGÖREV: Sana günün trend başlıklarından bir liste verilecek. İçlerinden Doksanland'a\nEN UYGUN, en neşeli olanı seç ve 90'lar/2000'ler bakışıyla bir gönderi taslağı yaz.\nHiçbiri uygun değilse uygun:false döndür. Zorlama — kötü bir gönderi, gönderi olmamasından kötüdür.\n\nSADECE şu JSON'u döndür, başka hiçbir şey yazma:\n{\n  \"uygun\": true | false,\n  \"ret_sebebi\": \"uygun false ise kısa sebep\",\n  \"secilen_konu\": \"seçtiğin başlık\",\n  \"hook\": \"görselde görünecek 2-7 kelimelik kanca\",\n  \"caption_tr\": \"3-5 satırlık açıklama\",\n  \"alt_satir\": \"görselde kancanın altındaki tek satır\",\n  \"renk\": \"plum | cream | yellow | coral | teal\",\n  \"dogrulanacak\": [\"doğrulanması gereken iddialar\"]\n}`;\n\nreturn [{ json: { system } }];"
+      },
+      "id": "a1000000-0000-4000-8000-000000000004",
+      "name": "Doksanland brief",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        20,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Read the desk's JSON, refuse anything it declined, and build the visual spec.\n\nconst raw = $json?.content?.[0]?.text || '';\nconst match = raw.match(/\\{[\\s\\S]*\\}/);\nif (!match) throw new Error('Desk did not return JSON: ' + raw.slice(0, 300));\n\nconst d = JSON.parse(match[0]);\nconst candidates = $('Gate and pick').first().json.candidates;\n\nif (d.uygun === false || !d.hook || !d.caption_tr) {\n  return [{ json: { skipped: true, topic: candidates.join(' / '), reason: d.ret_sebebi || 'desk declined' } }];\n}\n\nconst id = 'gundem-' + new Date().toISOString().slice(0, 16).replace(/[-:T]/g, '');\nconst palette = ['plum', 'cream', 'yellow', 'coral', 'teal'];\n\nreturn [{ json: {\n  skipped: false,\n  id,\n  topic: d.secilen_konu || candidates[0],\n  hook: d.hook,\n  caption_tr: d.caption_tr,\n  needsCheck: d.dogrulanacak || [],\n  visual: {\n    id,\n    format: 'post',\n    kind: 'cover',\n    bg: palette.includes(d.renk) ? d.renk : 'plum',\n    kicker: 'Doksanland Bülteni',\n    title: d.hook,\n    sub: d.alt_satir || '',\n    vhs: false\n  }\n} }];"
+      },
+      "id": "a1000000-0000-4000-8000-000000000006",
+      "name": "Build the visual",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.skipped }}",
+              "rightValue": "={{ false }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a1000000-0000-4000-8000-000000000007",
+      "name": "Worth posting?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://render:4000/render",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.visual) }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "data"
+            }
+          }
+        }
+      },
+      "id": "a1000000-0000-4000-8000-000000000008",
+      "name": "Render the image",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendPhoto",
+        "chatId": "={{ $env.DOKSANLAND_TELEGRAM_CHAT_ID }}",
+        "binaryData": true,
+        "binaryPropertyName": "data",
+        "additionalFields": {}
+      },
+      "id": "a1000000-0000-4000-8000-000000000009",
+      "name": "Send preview",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1120,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "chatId": "={{ $env.DOKSANLAND_TELEGRAM_CHAT_ID }}",
+        "message": "={{ '🗞 *Gündem masası* — ' + $('Build the visual').first().json.topic + '\\n\\n' + $('Build the visual').first().json.caption_tr + ( $('Build the visual').first().json.needsCheck.length ? '\\n\\n⚠️ DOĞRULANACAK: ' + $('Build the visual').first().json.needsCheck.join(', ') : '' ) }}",
+        "approvalOptions": {
+          "values": {
+            "approvalType": "double"
+          }
+        },
+        "options": {}
+      },
+      "id": "a1000000-0000-4000-8000-000000000010",
+      "name": "Bertuğ approves?",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1340,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c2",
+              "leftValue": "={{ $json.data.approved }}",
+              "rightValue": "={{ true }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a1000000-0000-4000-8000-000000000011",
+      "name": "Approved",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1560,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Approved. Hand to the publisher.\n// Instagram fetches images from a PUBLIC url, so the image is pushed to the repo's\n// publish-media branch first and posted from its raw.githubusercontent address.\n// Wire DOK-30 Publisher here once the media branch is connected.\nconst v = $('Build the visual').first().json;\nreturn [{ json: { status: 'approved', id: v.id, topic: v.topic, caption_tr: v.caption_tr, visual: v.visual, approvedAt: new Date().toISOString() } }];"
+      },
+      "id": "a1000000-0000-4000-8000-000000000012",
+      "name": "Queue for publishing",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1780,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Stopped by Bertuğ, or refused by the desk. Nothing goes out.\nconst v = $('Build the visual').first().json;\nreturn [{ json: { status: 'stopped', id: v.id || null, topic: v.topic || null, reason: v.reason || 'rejected on Telegram', at: new Date().toISOString() } }];"
+      },
+      "id": "a1000000-0000-4000-8000-000000000013",
+      "name": "Dropped",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1780,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Every hour": {
+      "main": [
+        [
+          {
+            "node": "Google Trends TR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Trends TR": {
+      "main": [
+        [
+          {
+            "node": "Gate and pick",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gate and pick": {
+      "main": [
+        [
+          {
+            "node": "Doksanland brief",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Doksanland brief": {
+      "main": [
+        [
+          {
+            "node": "Draft the post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Draft the post": {
+      "main": [
+        [
+          {
+            "node": "Build the visual",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build the visual": {
+      "main": [
+        [
+          {
+            "node": "Worth posting?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Worth posting?": {
+      "main": [
+        [
+          {
+            "node": "Render the image",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Dropped",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Render the image": {
+      "main": [
+        [
+          {
+            "node": "Send preview",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send preview": {
+      "main": [
+        [
+          {
+            "node": "Bertuğ approves?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bertuğ approves?": {
+      "main": [
+        [
+          {
+            "node": "Approved",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Approved": {
+      "main": [
+        [
+          {
+            "node": "Queue for publishing",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Dropped",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Istanbul"
+  },
+  "pinData": {}
+}

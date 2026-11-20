@@ -1,0 +1,10 @@
+{
+  "name": "doksanland-render-service",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "HTTP render service for the Doksanland house template",
+  "main": "server.mjs",
+  "scripts": { "start": "node server.mjs" },
+  "dependencies": { "playwright": "^1.49.0" }
+}
