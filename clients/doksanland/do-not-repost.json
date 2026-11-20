@@ -1,0 +1,23 @@
+{
+  "note": "Handles we must never repost, and why. Checked by the Repost desk before every candidate. Add a row on every refusal, every 'no' to an outreach DM, and every red flag found in a bio.",
+  "updated": "2026-11-20",
+  "blocked": [],
+  "categories_blocked_on_sight": [
+    "caps/meme aggregators (repost others, often crop the watermark)",
+    "pages built on TV stills, dizi screenshots, film frames, ad clips",
+    "game IP and licensed character pages",
+    "hidden-camera, prank and 'social experiment' accounts",
+    "accounts mixing in politics or religion at any level",
+    "street-interview and daytime-TV clip farms",
+    "anything with alcohol in the handle, bio or frame",
+    "then-vs-now price or salary content",
+    "accounts showing real children's faces",
+    "fan edit accounts (commercial music + celebrity footage)",
+    "accounts dormant more than 6 months"
+  ],
+  "bio_red_flag_strings": [
+    "izinsiz paylaşım yasak", "repost yasak", "izinsiz kullanılamaz", "no repost",
+    "do not repost", "tüm hakları saklıdır", "©", "DM for removal",
+    "kaynak göstermeden paylaşmayın"
+  ]
+}
