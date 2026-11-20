@@ -42,12 +42,15 @@ Length: feed 1 to 5 short lines. Reel captions shorter than feed captions.
 - Clickbait that the post doesn't deliver.
 - Mocking a private person, appearance, accent, region or group.
 - Invented facts presented as true. Unsure → `[DOĞRULANACAK]`.
+- Pinning a memory to the wrong device or year. Snake shipped on the **Nokia 6110 in 1998**, not the
+  3310 — write "o tuşlu telefonda yılan" unless the exact model is confirmed. When a memory is real
+  but the hardware or date is fuzzy, describe the feeling, not the spec sheet.
 
 ## Examples
 
 **Nostalji · carousel**
 > 2000'ler çocuğunun telefonunda olan 7 şey
-> yılan oyunu rekoru, kardan adam zil sesi, 160 karakterlik sms kavgaları… hatırla bakalım.
+> o tuşlu telefondaki yılan oyunu rekoru, kendi bestelediğin zil sesi, sms'i üçe bölmek… hatırla bakalım.
 > kaçı sende vardı? 👇
 
 **Teneffüs · post**
