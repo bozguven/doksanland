@@ -37,7 +37,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Doksanland Gündem desk — first gate.\n// A Türkiye trend list is mostly politics and football, so this is deliberately blunt.\n// It is only the CHEAP gate: it catches obvious words, but it cannot know that\n// \"Ömer Bolat\" is a minister or that \"Çaykur Rizespor\" is a club. The desk's own\n// judgement (next node) is the real gate, and it must refuse anything it cannot place.\n\nconst BLOCK = [\n  // politics and state\n  'cumhurbaşkan','başbakan','bakan','meclis','parti','akp','chp','mhp','iyi parti','dem parti','seçim','siyaset','belediye','vali','asker','savaş','operasyon','şehit','terör','mavi vatan','gazze','israil','ukrayna','rusya','suriye',\n  // religion\n  'imam','cami','namaz','oruç','ramazan','kurban','dua','ayet','hadis','diyanet','hac','umre',\n  // money\n  'dolar','euro','altın','enflasyon','zam','faiz','asgari ücret','kira','ekonomi','maaş','vergi','iflas','kriz','borsa','bitcoin','kredi','indirim','ucuz','pahalı','fiyat',\n  // harm and tragedy\n  'öldü','ölüm','vefat','cenaze','kaza','deprem','sel','yangın','cinayet','tecavüz','taciz','şiddet','gözaltı','tutukland','dava','mahkeme','savcı','hastane','kanser','intihar','hasta',\n  // sport (clubs, bodies and the vocabulary around them)\n  'fenerbahçe','galatasaray','beşiktaş','trabzonspor','başakşehir','rizespor','konyaspor','antalyaspor','alanyaspor','kasımpaşa','göztepe','samsunspor','gaziantep fk','eyüpspor','bodrum fk','sivasspor','kayserispor','hatayspor','adana demirspor','pendikspor','spor','futbol','basketbol','maç','transfer','hakem','penaltı','süper lig','puan durumu','şampiyonlar ligi','tff','derbi','teknik direktör',\n  // vice\n  'bahis','kumar','iddaa','porno','seks','alkol','rakı','bira','şarap','sigara'\n];\n\nconst seen = $getWorkflowStaticData('global');\nseen.titles = Array.isArray(seen.titles) ? seen.titles : [];\n\nconst norm = (s) => (s || '').toLocaleLowerCase('tr');\nconst survivors = [];\n\nfor (const item of $input.all()) {\n  const title = item.json.title || '';\n  const t = norm(title);\n  if (!title) continue;\n  if (BLOCK.some((w) => t.includes(w))) continue;   // obvious off-limits\n  if (seen.titles.includes(t)) continue;             // already covered\n  survivors.push(title);\n}\n\nif (seen.titles.length > 400) seen.titles = seen.titles.slice(-200);\nif (survivors.length === 0) return [];\n\n// Hand the desk a shortlist and let it choose, rather than forcing the first one.\nconst candidates = survivors.slice(0, 6);\nfor (const c of candidates) seen.titles.push(norm(c));\n\nreturn [{ json: { candidates, checkedAt: new Date().toISOString() } }];"
+        "jsCode": "// Doksanland Gündem desk — first gate.\n// A Türkiye trend list is mostly politics and football, so this is deliberately blunt.\n// It is only the CHEAP gate: it catches obvious words, but it cannot know that\n// \"Ömer Bolat\" is a minister or that \"Çaykur Rizespor\" is a club. The desk's own\n// judgement (next node) is the real gate, and it must refuse anything it cannot place.\n\nconst BLOCK = [\n  // politics and state\n  'cumhurbaşkan','başbakan','bakan','meclis','parti','akp','chp','mhp','iyi parti','dem parti','seçim','siyaset','belediye','vali','asker','savaş','operasyon','şehit','terör','mavi vatan','gazze','israil','ukrayna','rusya','suriye',\n  // religion\n  'imam','cami','namaz','oruç','ramazan','kurban','dua','ayet','hadis','diyanet','hac','umre',\n  // money\n  'dolar','euro','altın','enflasyon','zam','faiz','asgari ücret','kira','ekonomi','maaş','vergi','iflas','kriz','borsa','bitcoin','kredi','indirim','ucuz','pahalı','fiyat',\n  // harm and tragedy\n  'hayatını kaybetti','ifşa','aldat','boşan','dolandırıc','kavga','savunma','gözyaşı','öldü','ölüm','vefat','cenaze','kaza','deprem','sel','yangın','cinayet','tecavüz','taciz','şiddet','gözaltı','tutukland','dava','mahkeme','savcı','hastane','kanser','intihar','hasta',\n  // sport (clubs, bodies and the vocabulary around them)\n  'fenerbahçe','galatasaray','beşiktaş','trabzonspor','başakşehir','rizespor','konyaspor','antalyaspor','alanyaspor','kasımpaşa','göztepe','samsunspor','gaziantep fk','eyüpspor','bodrum fk','sivasspor','kayserispor','hatayspor','adana demirspor','pendikspor','spor','futbol','basketbol','maç','transfer','hakem','penaltı','süper lig','puan durumu','şampiyonlar ligi','tff','derbi','teknik direktör',\n  // vice\n  'bahis','kumar','iddaa','porno','seks','alkol','rakı','bira','şarap','sigara'\n];\n\nconst seen = $getWorkflowStaticData('global');\nseen.titles = Array.isArray(seen.titles) ? seen.titles : [];\n\nconst norm = (s) => (s || '').toLocaleLowerCase('tr');\nconst survivors = [];\n\nfor (const item of $input.all()) {\n  const title = item.json.title || '';\n  const t = norm(title);\n  if (!title) continue;\n  if (BLOCK.some((w) => t.includes(w))) continue;   // obvious off-limits\n  if (seen.titles.includes(t)) continue;             // already covered\n  survivors.push(title);\n}\n\nif (seen.titles.length > 400) seen.titles = seen.titles.slice(-200);\nif (survivors.length === 0) return [];\n\n// Hand the desk a shortlist and let it choose, rather than forcing the first one.\nconst candidates = survivors.slice(0, 6);\nfor (const c of candidates) seen.titles.push(norm(c));\n\nreturn [{ json: { candidates, checkedAt: new Date().toISOString() } }];"
       },
       "id": "a1000000-0000-4000-8000-000000000003",
       "name": "Gate and pick",
@@ -278,11 +278,11 @@
     },
     {
       "parameters": {
-        "url": "https://onedio.com/Publisher/publisher-gundem.rss",
+        "url": "https://onedio.com/Publisher/publisher-goygoy.rss",
         "options": {}
       },
       "id": "a1000000-0000-4000-8000-00000000001b",
-      "name": "Onedio gündem",
+      "name": "Onedio Goygoy",
       "type": "n8n-nodes-base.rssFeedRead",
       "typeVersion": 1.1,
       "position": [
@@ -292,7 +292,7 @@
     },
     {
       "parameters": {
-        "numberInputs": 3
+        "numberInputs": 5
       },
       "id": "a1000000-0000-4000-8000-00000000001c",
       "name": "All sources",
@@ -301,6 +301,34 @@
       "position": [
         -200,
         300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "http://feeds.feedburner.com/webteknocom",
+        "options": {}
+      },
+      "id": "a1000000-0000-4000-8000-00000000001d",
+      "name": "Webtekno",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.1,
+      "position": [
+        -420,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://knowyourmeme.com/newsfeed.rss",
+        "options": {}
+      },
+      "id": "a1000000-0000-4000-8000-00000000001e",
+      "name": "Know Your Meme",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.1,
+      "position": [
+        -420,
+        720
       ]
     }
   ],
@@ -314,12 +342,22 @@
             "index": 0
           },
           {
+            "node": "Onedio Goygoy",
+            "type": "main",
+            "index": 0
+          },
+          {
             "node": "ListeList",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Onedio gündem",
+            "node": "Webtekno",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Know Your Meme",
             "type": "main",
             "index": 0
           }
@@ -456,17 +494,6 @@
           {
             "node": "All sources",
             "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Onedio gündem": {
-      "main": [
-        [
-          {
-            "node": "All sources",
-            "type": "main",
             "index": 2
           }
         ]
@@ -479,6 +506,39 @@
             "node": "Gate and pick",
             "type": "main",
             "index": 0
+          }
+        ]
+      ]
+    },
+    "Onedio Goygoy": {
+      "main": [
+        [
+          {
+            "node": "All sources",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Webtekno": {
+      "main": [
+        [
+          {
+            "node": "All sources",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Know Your Meme": {
+      "main": [
+        [
+          {
+            "node": "All sources",
+            "type": "main",
+            "index": 4
           }
         ]
       ]
