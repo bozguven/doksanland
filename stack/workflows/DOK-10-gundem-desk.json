@@ -32,7 +32,7 @@
       "typeVersion": 1.1,
       "position": [
         -420,
-        300
+        160
       ]
     },
     {
@@ -44,7 +44,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -200,
+        20,
         300
       ]
     },
@@ -77,7 +77,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        240,
+        460,
         300
       ]
     },
@@ -90,7 +90,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        20,
+        240,
         300
       ]
     },
@@ -103,7 +103,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        460,
+        680,
         300
       ]
     },
@@ -136,7 +136,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        680,
+        900,
         300
       ]
     },
@@ -161,7 +161,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        900,
+        1120,
         200
       ]
     },
@@ -178,7 +178,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1120,
+        1340,
         200
       ]
     },
@@ -199,7 +199,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1340,
+        1560,
         200
       ]
     },
@@ -232,7 +232,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1560,
+        1780,
         200
       ]
     },
@@ -245,7 +245,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1780,
+        2000,
         100
       ]
     },
@@ -258,7 +258,48 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1780,
+        2000,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://listelist.com/feed/",
+        "options": {}
+      },
+      "id": "a1000000-0000-4000-8000-00000000001a",
+      "name": "ListeList",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.1,
+      "position": [
+        -420,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://onedio.com/Publisher/publisher-gundem.rss",
+        "options": {}
+      },
+      "id": "a1000000-0000-4000-8000-00000000001b",
+      "name": "Onedio gündem",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.1,
+      "position": [
+        -420,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "id": "a1000000-0000-4000-8000-00000000001c",
+      "name": "All sources",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        -200,
         300
       ]
     }
@@ -271,6 +312,16 @@
             "node": "Google Trends TR",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "ListeList",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Onedio gündem",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -279,7 +330,7 @@
       "main": [
         [
           {
-            "node": "Gate and pick",
+            "node": "All sources",
             "type": "main",
             "index": 0
           }
@@ -393,6 +444,39 @@
         [
           {
             "node": "Dropped",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ListeList": {
+      "main": [
+        [
+          {
+            "node": "All sources",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Onedio gündem": {
+      "main": [
+        [
+          {
+            "node": "All sources",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "All sources": {
+      "main": [
+        [
+          {
+            "node": "Gate and pick",
             "type": "main",
             "index": 0
           }
